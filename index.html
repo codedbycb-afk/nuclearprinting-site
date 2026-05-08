@@ -787,6 +787,21 @@ body.cur-hover .cursor-ring{width:40px;height:40px;border-color:#fff}
   font-family:var(--mono);font-size:12px;letter-spacing:.2em;
 }
 
+/* Mobile typography bump — bigger, more legible on phones */
+@media (max-width:768px){
+  body{font-size:18px}
+  p,li,.lead,.h-sub,.hsvc-head p,.svc-card p,.proc-step p,.work-cap .l,.cta-blob p,.ftr-addr,.ftr a,.ftr-news p{font-size:17px;line-height:1.55}
+  .hsvc-head p,.svc-card p{font-size:17px}
+  .h-meta,.section-eyebrow,.scroll-ind span,.ftr-col h4,.work-cap .r,.proc-step .num,.proc-head .meta,.proc-head .meta b{font-size:13px;letter-spacing:.18em}
+  .stat .label{font-size:13px}
+  .stat .desc{font-size:16px}
+  .work-cap .l small{font-size:13px}
+  .nav-cta a,.btn,.btn-primary,.btn-secondary{font-size:15px}
+  .hdr-mark{font-size:15px}
+  .hdr-mark small{font-size:11px}
+  .ftr a{font-size:16px}
+  input,textarea,button{font-size:16px} /* prevents iOS zoom-on-focus */
+}
 </style>
 </head><body><div id="root"></div>
 <script type="text/babel" data-presets="react">
