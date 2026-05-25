@@ -171,6 +171,32 @@ document.body.insertAdjacentHTML("beforeend",`
   </div>
   <div class="layer-body" id="layerBody"></div>
 </div>
+<div class="quote-scrim" id="quoteScrim"></div>
+<div class="quote-modal" id="quoteModal" role="dialog" aria-modal="true" aria-label="Get a quote">
+  <div class="qm-bar">
+    <div class="qm-t"><span class="qm-dot"></span><span class="qm-title">Start Your Order — Nuclear Printing</span></div>
+    <button class="qm-close" id="qmClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="qm-body">
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/16ntRlFvNC5ZfJGQzJtN"
+      id="inline-16ntRlFvNC5ZfJGQzJtN"
+      title="Quote Form 1"
+      data-layout='{"id":"INLINE"}'
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Quote Form 1"
+      data-height="2048"
+      data-layout-iframe-id="inline-16ntRlFvNC5ZfJGQzJtN"
+      data-form-id="16ntRlFvNC5ZfJGQzJtN"
+      loading="lazy"
+      style="width:100%;border:0;display:block;background:#0a0a0a"></iframe>
+  </div>
+</div>
 <div class="story-viewer" id="storyViewer">
   <button class="sv-close" id="svClose" aria-label="Close">&times;</button>
   <div class="sv-frame">
@@ -434,15 +460,30 @@ function closeLayer(){
 }
 $("#layerClose").onclick=closeLayer;
 scrim.onclick=closeLayer;
-addEventListener("keydown",e=>{if(e.key==="Escape"){closeLayer();closeStory();$("#mnav").classList.remove("on");}});
+addEventListener("keydown",e=>{if(e.key==="Escape"){closeLayer();closeStory();closeQuote();$("#mnav").classList.remove("on");}});
 
-/* ---------- QUOTE ACTION ---------- */
+/* ---------- QUOTE MODAL (GHL form lightbox) ---------- */
+const qm=$("#quoteModal"),qms=$("#quoteScrim");
 function goQuote(){
   closeLayer();
-  const q=$("#quote");
-  if(q)q.scrollIntoView({behavior:"smooth"});
-  else location.href="index.html#quote";
+  pshh();
+  document.body.classList.add("layer-open");
+  qms.classList.add("on");qm.classList.add("on");
+  // load the GHL embed script once, on first open
+  if(!window.__ghlFormLoaded){
+    const s=document.createElement("script");
+    s.src="https://link.msgsndr.com/js/form_embed.js";
+    s.async=true;document.body.appendChild(s);
+    window.__ghlFormLoaded=true;
+  }
 }
+function closeQuote(){
+  qms.classList.remove("on");qm.classList.remove("on");
+  if(!sv.classList.contains("on")&&!layer.classList.contains("on"))
+    document.body.classList.remove("layer-open");
+}
+$("#qmClose").onclick=closeQuote;
+qms.onclick=closeQuote;
 
 /* ---------- FAQ ACCORDION ---------- */
 $$(".faq-q").forEach(q=>q.addEventListener("click",()=>{
