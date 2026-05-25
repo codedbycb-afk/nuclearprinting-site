@@ -183,46 +183,56 @@ document.body.insertAdjacentHTML("beforeend",`
   </div>
 </div>`);
 
-/* ---------- PNEUMATIC "PSHH" — air-release / spray-can character ---------- */
+/* ---------- PNEUMATIC "PSHH" — full spray-can release v5 ---------- */
 let actx;
 function pshh(){
   try{
     actx = actx || new (window.AudioContext||window.webkitAudioContext)();
     if(actx.state==="suspended") actx.resume();
-    const t0=actx.currentTime, dur=0.55, sr=actx.sampleRate;
+    const t0=actx.currentTime, dur=0.75, sr=actx.sampleRate;
 
-    // breathy white noise buffer with a slow tail (sustained airflow)
-    const buf=actx.createBuffer(1,sr*dur,sr);
-    const d=buf.getChannelData(0);
-    for(let i=0;i<d.length;i++){
-      const t=i/d.length;
-      // attack ramp 0→1 over first 4%, then long gentle decay
-      const env = t<0.04 ? t/0.04 : Math.pow(1-((t-0.04)/0.96), 1.6);
-      d[i]=(Math.random()*2-1)*env;
+    /* === LAYER 1: high sizzle (the "sssss" hiss) === */
+    const buf1=actx.createBuffer(1,sr*dur,sr);
+    const d1=buf1.getChannelData(0);
+    for(let i=0;i<d1.length;i++){
+      const t=i/d1.length;
+      const env = t<0.025 ? t/0.025 : Math.pow(1-((t-0.025)/0.975), 1.3);
+      d1[i]=(Math.random()*2-1)*env;
     }
-    const src=actx.createBufferSource();src.buffer=buf;
+    const src1=actx.createBufferSource();src1.buffer=buf1;
+    const hp1=actx.createBiquadFilter();hp1.type="highpass";
+    hp1.frequency.setValueAtTime(2400,t0);
+    hp1.frequency.exponentialRampToValueAtTime(1400,t0+dur);
+    const g1=actx.createGain();
+    g1.gain.setValueAtTime(0.0001,t0);
+    g1.gain.exponentialRampToValueAtTime(0.32,t0+0.012); // sharp burst
+    g1.gain.exponentialRampToValueAtTime(0.12,t0+0.20);  // sustain
+    g1.gain.exponentialRampToValueAtTime(0.001,t0+dur);
+    src1.connect(hp1);hp1.connect(g1);g1.connect(actx.destination);
 
-    // bandpass keeps the airy "ssss" tone — center sweeps slightly down
-    const bp=actx.createBiquadFilter();
-    bp.type="bandpass";
-    bp.Q.value=0.9;
-    bp.frequency.setValueAtTime(5200,t0);
-    bp.frequency.exponentialRampToValueAtTime(2100,t0+dur);
+    /* === LAYER 2: lower body (the airflow "whoosh" under the hiss) === */
+    const buf2=actx.createBuffer(1,sr*dur,sr);
+    const d2=buf2.getChannelData(0);
+    // pink-ish noise via simple low-pass averaging — warmer body
+    let last=0;
+    for(let i=0;i<d2.length;i++){
+      const t=i/d2.length;
+      const w=(Math.random()*2-1);
+      last=last*0.7+w*0.3;
+      const env = t<0.06 ? t/0.06 : Math.pow(1-((t-0.06)/0.94), 1.9);
+      d2[i]=last*env*1.4;
+    }
+    const src2=actx.createBufferSource();src2.buffer=buf2;
+    const bp2=actx.createBiquadFilter();bp2.type="bandpass";bp2.Q.value=0.6;
+    bp2.frequency.setValueAtTime(1100,t0);
+    bp2.frequency.exponentialRampToValueAtTime(550,t0+dur);
+    const g2=actx.createGain();
+    g2.gain.setValueAtTime(0.0001,t0);
+    g2.gain.exponentialRampToValueAtTime(0.18,t0+0.04);
+    g2.gain.exponentialRampToValueAtTime(0.001,t0+dur);
+    src2.connect(bp2);bp2.connect(g2);g2.connect(actx.destination);
 
-    // highpass cuts the rumble so it doesn't sound muddy
-    const hp=actx.createBiquadFilter();
-    hp.type="highpass";
-    hp.frequency.setValueAtTime(900,t0);
-    hp.frequency.exponentialRampToValueAtTime(600,t0+dur);
-
-    const g=actx.createGain();
-    g.gain.setValueAtTime(0.0001,t0);
-    g.gain.exponentialRampToValueAtTime(0.22,t0+0.018); // sharp onset
-    g.gain.exponentialRampToValueAtTime(0.08,t0+0.18);  // settle into hiss
-    g.gain.exponentialRampToValueAtTime(0.001,t0+dur);  // fade out
-
-    src.connect(hp);hp.connect(bp);bp.connect(g);g.connect(actx.destination);
-    src.start();
+    src1.start();src2.start();
   }catch(e){}
 }
 
