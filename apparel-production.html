@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/app.css" />
+<link rel="stylesheet" href="assets/app.css?v=3" />
 </head>
 <body>
 
@@ -17,112 +17,162 @@
   <div class="stories-inner" id="stories"></div>
 </section>
 
-<!-- PAGE HERO -->
-<header class="page-hero" data-section="prod-hero" data-cta="Get a Quote" data-layer="production">
-  <div class="hero-bg" data-parallax="0.12"><img src="assets/img/squeegee-bw.jpg" alt="Screen printing on the Nuclear production floor" /></div>
-  <div class="wrap page-hero-inner">
+<!-- CINEMATIC HERO — no CTAs per Joe -->
+<header class="ap-hero" data-section="prod-hero" data-cta="Get a Quote">
+  <div class="hero-bg" data-parallax="0.14"><img src="assets/img/squeegee-bw.jpg" alt="Screen printing on the Nuclear production floor" /></div>
+  <div class="wrap ap-hero-inner">
     <div class="crumb reveal"><a href="index.html">Home</a> &nbsp;/&nbsp; Apparel Production</div>
-    <h1 class="reveal">Apparel Production</h1>
-    <p class="reveal">Lots of companies print ink on shirts. Production is everything that happens before and after that process. Mockups, approvals, communication, timelines, consistency, and execution all work together to create a retail-quality final product. From the first proof to the final delivery, every detail matters when apparel represents for you or your organization.</p>
-
-    <!-- 4 icon boxes (TODO: swap with deck page 10 icons) -->
-    <div class="icon-row reveal">
-      <div class="ic-box">
-        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="10" y="14" width="44" height="36" rx="3"/>
-          <path d="M10 24h44"/>
-          <circle cx="18" cy="19" r="1.6"/>
-          <circle cx="24" cy="19" r="1.6"/>
-          <path d="M22 36h20M22 42h14"/>
-        </svg>
-        <div class="ic-l">Mockups &amp; Approvals</div>
-      </div>
-      <div class="ic-box">
-        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M18 12h22a6 6 0 016 6v28a6 6 0 01-6 6H18z"/>
-          <path d="M24 22h16M24 30h16M24 38h10"/>
-        </svg>
-        <div class="ic-l">Clear Communication</div>
-      </div>
-      <div class="ic-box">
-        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="22"/>
-          <path d="M32 18v14l10 6"/>
-        </svg>
-        <div class="ic-l">Timelines</div>
-      </div>
-      <div class="ic-box">
-        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M12 32l14 14 26-28"/>
-        </svg>
-        <div class="ic-l">Consistency &amp; Execution</div>
-      </div>
-    </div>
+    <div class="eyebrow reveal" style="margin-top:18px">The Production Story</div>
+    <h1 class="reveal">Apparel Production.</h1>
+    <p class="ap-hero-p reveal">Lots of companies print ink on shirts. Production is everything that happens before and after that process. Mockups, approvals, communication, timelines, consistency, and execution all work together to create a retail-quality final product.</p>
+    <p class="ap-hero-p reveal">From the first proof to the final delivery, every detail matters when apparel represents for you or your organization.</p>
+  </div>
+  <div class="ap-hero-scroll reveal" aria-hidden="true">
+    <span>The Four Pillars</span>
+    <svg viewBox="0 0 14 28"><path d="M7 2v22M2 19l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
   </div>
 </header>
 
-<!-- STAT STRIP -->
-<section class="section-sm" data-section="prod-stats" data-cta="Get a Quote" data-deep="1">
+<!-- 4 PROCESS PILLARS — breathing section, not crammed -->
+<section class="pillars" data-section="ap-pillars" data-cta="Get a Quote">
   <div class="wrap">
-    <div class="stat-strip">
-      <div class="stat reveal"><div class="sn"><span data-count="3">0</span></div><div class="sl">Production Methods</div></div>
-      <div class="stat reveal"><div class="sn">Retail</div><div class="sl">Quality Standard</div></div>
-      <div class="stat reveal"><div class="sn"><span data-count="100" data-suffix="%">0%</span></div><div class="sl">On-Time Philosophy</div></div>
-      <div class="stat reveal"><div class="sn">CLE</div><div class="sl">Built &amp; Based</div></div>
+    <div class="pillars-head reveal">
+      <div class="eyebrow">Built Into Every Order</div>
+      <h2>Four pillars that hold the work.</h2>
+    </div>
+    <div class="pillar-grid">
+      <article class="pillar reveal">
+        <div class="p-num">01</div>
+        <svg class="p-ic" viewBox="0 0 72 72" aria-hidden="true">
+          <rect x="10" y="14" width="52" height="42" rx="3"/>
+          <path d="M10 26h52"/>
+          <circle cx="18" cy="20" r="1.6" fill="currentColor"/>
+          <circle cx="24" cy="20" r="1.6" fill="currentColor"/>
+          <path d="M22 40h28M22 47h20"/>
+        </svg>
+        <h3>Mockups &amp; Approvals</h3>
+        <p>Every concept visualized on the garment before a single print runs. Sign-off baked into the workflow.</p>
+      </article>
+
+      <article class="pillar reveal">
+        <div class="p-num">02</div>
+        <svg class="p-ic" viewBox="0 0 72 72" aria-hidden="true">
+          <path d="M18 14h26a8 8 0 018 8v28a8 8 0 01-8 8H18z"/>
+          <path d="M26 26h20M26 34h20M26 42h12"/>
+        </svg>
+        <h3>Clear Communication</h3>
+        <p>You hear from a human, on time, every step. No vendor-portal silence, no chasing for status updates.</p>
+      </article>
+
+      <article class="pillar reveal">
+        <div class="p-num">03</div>
+        <svg class="p-ic" viewBox="0 0 72 72" aria-hidden="true">
+          <circle cx="36" cy="36" r="24"/>
+          <path d="M36 20v16l11 7"/>
+        </svg>
+        <h3>Timelines</h3>
+        <p>Production schedules built around your deadline — and protected through every step on the floor.</p>
+      </article>
+
+      <article class="pillar reveal">
+        <div class="p-num">04</div>
+        <svg class="p-ic" viewBox="0 0 72 72" aria-hidden="true">
+          <path d="M14 36l16 16 28-30"/>
+        </svg>
+        <h3>Consistency &amp; Execution</h3>
+        <p>Run-to-run, order-to-order, the standard holds. The apparel always lands at retail quality.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- THE PRODUCTION FLOOR -->
-<section class="section" data-section="prod-detail" data-cta="Get a Quote">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">The Production Floor</div>
-      <h2>How Nuclear Builds Apparel</h2>
-      <p class="lead">Nuclear builds apparel through three core production methods: screen printing, embroidery, and direct-to-film. Each process serves a different purpose depending on the garment, artwork, quantity, and overall look you're trying to achieve.</p>
-    </div>
+<!-- THE PRODUCTION FLOOR — intro -->
+<section class="floor-intro" data-section="floor-intro" data-cta="Get a Quote">
+  <div class="wrap reveal">
+    <div class="eyebrow">The Production Floor</div>
+    <h2>How Nuclear builds apparel.</h2>
+    <p class="lead">Nuclear builds apparel through three core production methods: screen printing, embroidery, and direct-to-film. Each process serves a different purpose depending on the garment, artwork, quantity, and overall look you're trying to achieve.</p>
+  </div>
+</section>
 
-    <div class="detail big">
-      <div class="d-visual reveal-l"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/><span class="tag">01 — Screen Printing</span></div>
-      <div class="d-text reveal-r"><div class="ix">01</div><h2>Screen Printing</h2>
-        <p>Screen printing is the foundation of modern apparel production and remains the industry standard for retail-quality merchandise, team apparel, uniforms, and large-scale orders. Built for durability, consistency, and visual impact, it's the go-to production method for organizations and people that want apparel to look professional, cohesive, and built to last.</p>
-        <div class="mini">
-          <div>Industry-standard retail quality</div>
-          <div>Built for durability &amp; consistency</div>
-          <div>Scales to large orders without losing detail</div>
-        </div>
-        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="screen">Inside Screen Printing</button></div>
-      </div>
+<!-- METHOD 01 — SCREEN PRINTING (full-viewport scroll moment) -->
+<section class="method" data-section="method-screen" data-cta="Inside Screen Printing" data-layer="screen">
+  <div class="method-bg"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/></div>
+  <div class="wrap method-inner">
+    <div class="m-visual reveal-l">
+      <img src="assets/img/screenprint.jpg" alt="Screen Printing"/>
+      <span class="m-chip">01 — The Foundation</span>
     </div>
-
-    <div class="detail big flip">
-      <div class="d-visual reveal-r"><img src="assets/img/embroidery.jpg" alt="Embroidery"/><span class="tag">02 — Embroidery</span></div>
-      <div class="d-text reveal-l"><div class="ix">02</div><h2>Embroidery</h2>
-        <p>Embroidery is the premium standard for polished, professional apparel. From corporate uniforms and hospitality programs to retail merchandise and branded outerwear, embroidery adds texture, durability, and elevated presentation that instantly separates apparel from standard printed goods.</p>
-        <div class="mini">
-          <div>Premium, polished finish</div>
-          <div>Uniforms, hospitality &amp; outerwear</div>
-          <div>Texture &amp; durability that elevates the garment</div>
-        </div>
-        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="embroidery">Inside Embroidery</button></div>
-      </div>
-    </div>
-
-    <div class="detail big">
-      <div class="d-visual reveal-l"><img src="assets/img/ink.jpg" alt="Direct to Film"/><span class="tag">03 — Direct-to-Film (DTF)</span></div>
-      <div class="d-text reveal-r"><div class="ix">03</div><h2>Direct-to-Film (DTF)</h2>
-        <p>Direct-to-film gives apparel production the flexibility to handle detailed artwork, full-color graphics, smaller runs, and fast-turnaround projects without sacrificing visual quality. It's a modern production method built for versatility, allowing brands, organizations, and events to produce clean professional apparel with speed and consistency.</p>
-        <div class="mini">
-          <div>Detailed artwork &amp; full-color graphics</div>
-          <div>Built for small runs &amp; fast turnarounds</div>
-          <div>Versatile across garment types</div>
-        </div>
-        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="dtf">Inside DTF</button></div>
-      </div>
+    <div class="m-text reveal-r">
+      <div class="m-num">01</div>
+      <h2>Screen Printing</h2>
+      <p class="m-lead">Screen printing is the foundation of modern apparel production and remains the industry standard for retail-quality merchandise, team apparel, uniforms, and large-scale orders.</p>
+      <p>Built for durability, consistency, and visual impact, it's the go-to production method for organizations and people that want apparel to look professional, cohesive, and built to last.</p>
+      <ul class="m-mini">
+        <li>Industry-standard retail quality</li>
+        <li>Built for durability &amp; consistency</li>
+        <li>Scales to large orders without losing detail</li>
+      </ul>
+      <button class="m-cta" data-open-layer="screen">
+        <span class="m-cta-l">Inside Screen Printing</span>
+        <span class="m-cta-arrow" aria-hidden="true">→</span>
+      </button>
     </div>
   </div>
 </section>
 
-<script type="module" src="assets/app.js"></script>
+<!-- METHOD 02 — EMBROIDERY -->
+<section class="method flip" data-section="method-embroidery" data-cta="Inside Embroidery" data-layer="embroidery">
+  <div class="method-bg"><img src="assets/img/embroidery.jpg" alt="Embroidery"/></div>
+  <div class="wrap method-inner">
+    <div class="m-visual reveal-r">
+      <img src="assets/img/embroidery.jpg" alt="Embroidery"/>
+      <span class="m-chip">02 — The Premium Standard</span>
+    </div>
+    <div class="m-text reveal-l">
+      <div class="m-num">02</div>
+      <h2>Embroidery</h2>
+      <p class="m-lead">Embroidery is the premium standard for polished, professional apparel.</p>
+      <p>From corporate uniforms and hospitality programs to retail merchandise and branded outerwear, embroidery adds texture, durability, and elevated presentation that instantly separates apparel from standard printed goods.</p>
+      <ul class="m-mini">
+        <li>Premium, polished finish</li>
+        <li>Uniforms, hospitality &amp; outerwear</li>
+        <li>Texture &amp; durability that elevates the garment</li>
+      </ul>
+      <button class="m-cta" data-open-layer="embroidery">
+        <span class="m-cta-l">Inside Embroidery</span>
+        <span class="m-cta-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD 03 — DTF -->
+<section class="method" data-section="method-dtf" data-cta="Inside DTF" data-layer="dtf">
+  <div class="method-bg"><img src="assets/img/ink.jpg" alt="Direct to Film"/></div>
+  <div class="wrap method-inner">
+    <div class="m-visual reveal-l">
+      <img src="assets/img/ink.jpg" alt="Direct to Film"/>
+      <span class="m-chip">03 — The Versatile</span>
+    </div>
+    <div class="m-text reveal-r">
+      <div class="m-num">03</div>
+      <h2>Direct-to-Film (DTF)</h2>
+      <p class="m-lead">Direct-to-film gives apparel production the flexibility to handle detailed artwork, full-color graphics, smaller runs, and fast-turnaround projects without sacrificing visual quality.</p>
+      <p>It's a modern production method built for versatility, allowing brands, organizations, and events to produce clean professional apparel with speed and consistency.</p>
+      <ul class="m-mini">
+        <li>Detailed artwork &amp; full-color graphics</li>
+        <li>Built for small runs &amp; fast turnarounds</li>
+        <li>Versatile across garment types</li>
+      </ul>
+      <button class="m-cta" data-open-layer="dtf">
+        <span class="m-cta-l">Inside DTF</span>
+        <span class="m-cta-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="assets/app.js?v=3"></script>
 </body>
 </html>
