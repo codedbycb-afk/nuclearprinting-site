@@ -183,22 +183,46 @@ document.body.insertAdjacentHTML("beforeend",`
   </div>
 </div>`);
 
-/* ---------- PNEUMATIC "PSHH" ---------- */
+/* ---------- PNEUMATIC "PSHH" — air-release / spray-can character ---------- */
 let actx;
 function pshh(){
   try{
     actx = actx || new (window.AudioContext||window.webkitAudioContext)();
     if(actx.state==="suspended") actx.resume();
-    const dur=0.26, sr=actx.sampleRate, buf=actx.createBuffer(1,sr*dur,sr);
+    const t0=actx.currentTime, dur=0.55, sr=actx.sampleRate;
+
+    // breathy white noise buffer with a slow tail (sustained airflow)
+    const buf=actx.createBuffer(1,sr*dur,sr);
     const d=buf.getChannelData(0);
-    for(let i=0;i<d.length;i++){const t=i/d.length;d[i]=(Math.random()*2-1)*Math.pow(1-t,2.4);}
+    for(let i=0;i<d.length;i++){
+      const t=i/d.length;
+      // attack ramp 0→1 over first 4%, then long gentle decay
+      const env = t<0.04 ? t/0.04 : Math.pow(1-((t-0.04)/0.96), 1.6);
+      d[i]=(Math.random()*2-1)*env;
+    }
     const src=actx.createBufferSource();src.buffer=buf;
-    const lp=actx.createBiquadFilter();lp.type="lowpass";
-    lp.frequency.setValueAtTime(2600,actx.currentTime);
-    lp.frequency.exponentialRampToValueAtTime(420,actx.currentTime+dur);
-    const g=actx.createGain();g.gain.setValueAtTime(0.16,actx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+dur);
-    src.connect(lp);lp.connect(g);g.connect(actx.destination);src.start();
+
+    // bandpass keeps the airy "ssss" tone — center sweeps slightly down
+    const bp=actx.createBiquadFilter();
+    bp.type="bandpass";
+    bp.Q.value=0.9;
+    bp.frequency.setValueAtTime(5200,t0);
+    bp.frequency.exponentialRampToValueAtTime(2100,t0+dur);
+
+    // highpass cuts the rumble so it doesn't sound muddy
+    const hp=actx.createBiquadFilter();
+    hp.type="highpass";
+    hp.frequency.setValueAtTime(900,t0);
+    hp.frequency.exponentialRampToValueAtTime(600,t0+dur);
+
+    const g=actx.createGain();
+    g.gain.setValueAtTime(0.0001,t0);
+    g.gain.exponentialRampToValueAtTime(0.22,t0+0.018); // sharp onset
+    g.gain.exponentialRampToValueAtTime(0.08,t0+0.18);  // settle into hiss
+    g.gain.exponentialRampToValueAtTime(0.001,t0+dur);  // fade out
+
+    src.connect(hp);hp.connect(bp);bp.connect(g);g.connect(actx.destination);
+    src.start();
   }catch(e){}
 }
 
