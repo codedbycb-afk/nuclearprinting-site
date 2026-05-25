@@ -126,40 +126,40 @@ document.body.insertAdjacentHTML("afterbegin",`
 </div>`);
 
 document.body.insertAdjacentHTML("beforeend",`
-<section class="quote-strip" id="quote">
-  <div class="wrap reveal">
-    <h2>Ready to elevate your team's look?</h2>
-    <p>Fast, reliable quoting — clear communication from the first message.</p>
-    <button class="btn btn-dark" data-quote>Start Your Order</button>
+<section class="lets-start" id="quote">
+  <div class="ls-bg"><img src="assets/img/squeegee-bw.jpg" alt="Nuclear Printing production floor"/></div>
+  <div class="wrap ls-inner reveal">
+    <div class="ls-mark"><img src="assets/logo-symbol.png" alt="Nuclear Printing"/></div>
+    <h2>Let's Get Started</h2>
+    <p class="ls-tag">When it matters how your team shows up, <b>we make sure they stand out.</b></p>
+    <p class="ls-p">We deliver apparel that helps your team appear as professional as they perform. From fresh artwork and updated uniforms to full-scale merch programs, we bring clarity, speed, and quality to every order.</p>
+    <p class="ls-q">Ready to elevate your team's look?</p>
+    <button class="btn-start" data-quote>Start Your Order</button>
+    <div class="ls-icons">
+      <a href="https://instagram.com/nuclearprinting" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5"/><circle cx="22.5" cy="9.5" r="1.2" fill="currentColor"/></svg>
+      </a>
+      <a href="https://nuclearprinting.com" target="_blank" rel="noopener" aria-label="Website">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="16" cy="16" r="11"/><path d="M5 16h22M16 5c4 4 4 18 0 22M16 5c-4 4-4 18 0 22"/></svg>
+      </a>
+      <a href="mailto:Joe@nuclearprinting.com" aria-label="Email">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 10l12 9 12-9"/></svg>
+      </a>
+    </div>
+    <div class="ls-meta">
+      <span>Nuclear Printing</span>
+      <span>2333 St. Clair Ave NE, Cleveland, Ohio 44114</span>
+      <span><a href="tel:+12162238050">(216) 223-8050</a></span>
+    </div>
+    <div class="ls-bot">
+      <a href="apparel-production.html">Apparel Production</a>
+      <a href="merchandising-systems.html">Merchandising Systems</a>
+      <a href="faq.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <span class="ls-copy">© ${yr} Nuclear Printing</span>
+    </div>
   </div>
 </section>
-<footer class="footer" id="footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img src="assets/logo-symbol.png" alt="Nuclear Printing" />
-        <p><strong>Nuclear Printing</strong> — full-scale apparel production &amp; merchandising systems, downtown Cleveland.</p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col"><h4>Explore</h4>
-          <a href="apparel-production.html">Apparel Production</a>
-          <a href="merchandising-systems.html">Merchandising Systems</a>
-          <a href="blog.html">Blog</a>
-          <a href="faq.html">FAQ</a></div>
-        <div class="footer-col"><h4>Visit</h4>
-          <p>2333 St. Clair Ave NE</p><p>Cleveland, Ohio 44114</p></div>
-        <div class="footer-col"><h4>Contact</h4>
-          <a href="tel:+12162238050">(216) 223-8050</a>
-          <a href="#" data-quote>Get a Quote</a>
-          <a href="https://instagram.com/nuclearprinting" target="_blank" rel="noopener">Instagram</a></div>
-      </div>
-    </div>
-    <div class="footer-bot">
-      <span>© ${yr} Nuclear Printing. All rights reserved.</span>
-      <span>Cleveland, Ohio · Apparel Production</span>
-    </div>
-  </div>
-</footer>
 <div class="float-btn idle" id="floatBtn" role="button" tabindex="0" aria-label="Contextual action">
   <div class="fb-orb"></div><div class="fb-text" id="fbText">Get a Quote</div>
 </div>
