@@ -463,13 +463,13 @@ scrim.onclick=closeLayer;
 addEventListener("keydown",e=>{if(e.key==="Escape"){closeLayer();closeStory();closeQuote();$("#mnav").classList.remove("on");}});
 
 /* ---------- QUOTE MODAL (GHL form lightbox) ---------- */
-const qm=$("#quoteModal"),qms=$("#quoteScrim");
 function goQuote(){
+  const qm=$("#quoteModal"),qms=$("#quoteScrim");
+  if(!qm||!qms){console.warn("Quote modal not in DOM");return;}
   closeLayer();
   pshh();
   document.body.classList.add("layer-open");
   qms.classList.add("on");qm.classList.add("on");
-  // load the GHL embed script once, on first open
   if(!window.__ghlFormLoaded){
     const s=document.createElement("script");
     s.src="https://link.msgsndr.com/js/form_embed.js";
@@ -478,12 +478,15 @@ function goQuote(){
   }
 }
 function closeQuote(){
+  const qm=$("#quoteModal"),qms=$("#quoteScrim");
+  if(!qm||!qms)return;
   qms.classList.remove("on");qm.classList.remove("on");
   if(!sv.classList.contains("on")&&!layer.classList.contains("on"))
     document.body.classList.remove("layer-open");
 }
-$("#qmClose").onclick=closeQuote;
-qms.onclick=closeQuote;
+const _qmClose=$("#qmClose"),_qms=$("#quoteScrim");
+if(_qmClose) _qmClose.onclick=closeQuote;
+if(_qms) _qms.onclick=closeQuote;
 
 /* ---------- FAQ ACCORDION ---------- */
 $$(".faq-q").forEach(q=>q.addEventListener("click",()=>{
