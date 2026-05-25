@@ -42,7 +42,7 @@ const LAYERS = {
     head:"Step Onto The Production Floor",
     lead:"A fully equipped facility where craftsmanship and technology work hand in hand. Here is how an order moves through Nuclear.",
     cards:[
-      ["01","Design & File Setup","Artwork is built or refined into clean, production-ready files — vectorized, color-standardized, press-ready."],
+      ["01","Mockups & Approvals","Concepts visualized on garment before a single print runs — sign-off baked into the workflow."],
       ["02","Screen Printing","Soft-hand prints produced with advanced equipment and skilled craftsmanship for sharp, lasting detail."],
       ["03","Embroidery","Precision stitching on caps, uniforms, and premium apparel — the detail demanded by top brands."],
       ["04","Direct to Film","Full-color, detail-heavy output with versatility across every garment type."],
@@ -57,7 +57,52 @@ const LAYERS = {
       ["C","Consistent & On-Brand","Approved designs only — every order stays consistent with your identity."],
       ["D","Setup to Fulfillment","Outfit a team, run a program, sell merch — handled end to end."],
       ["E","Scalable Infrastructure","Organized, repeatable processes that grow with your business."],
-      ["F","Real Partnership","Ongoing support — not order-taking. We stay in it with you."]]}
+      ["F","Real Partnership","Ongoing support — not order-taking. We stay in it with you."]]},
+
+  /* per-method layers (Apparel Production page) */
+  screen:{title:"Inside Screen Printing",kicker:"Production Method — 01",
+    head:"Screen Printing",
+    lead:"The foundation of modern apparel production. Built for retail-quality merchandise, team apparel, uniforms, and large-scale orders.",
+    cards:[
+      ["01","Why It's The Standard","Industry-standard durability and visual impact for organizations that want apparel that lasts."],
+      ["02","Soft-Hand Finish","Modern inks and pull technique deliver a soft, retail-grade hand — not the heavy plastisol slab."],
+      ["03","Color Accuracy","Inks mixed to spec and color-matched before a single shirt runs the line."],
+      ["04","Scales Cleanly","Built for runs of 50 or 5,000 without losing detail, registration, or consistency."],
+      ["05","Garment Range","Tees, hoodies, sweats, performance wear — print built for the substrate, not against it."],
+      ["06","Best For","Team apparel, retail merch, uniforms, fundraisers, large orders, and event drops."]]},
+
+  embroidery:{title:"Inside Embroidery",kicker:"Production Method — 02",
+    head:"Embroidery",
+    lead:"The premium standard for polished, professional apparel — texture, durability, and elevated presentation in one move.",
+    cards:[
+      ["01","Why Embroidery","Adds dimension and longevity that printed graphics can't match — the signal of a serious brand."],
+      ["02","Caps & Headwear","Sharp stitch detail on structured, unstructured, trucker, and 5-panel — produced consistently across orders."],
+      ["03","Corporate Uniforms","Polished, repeatable identity for staff, hospitality teams, and front-of-house programs."],
+      ["04","Premium Apparel","Outerwear, polos, woven shirts — the garment categories where embroidery elevates instantly."],
+      ["05","Digitizing","Logos digitized for clean stitch translation — not the auto-convert your average shop ships."],
+      ["06","Best For","Uniforms, hospitality, branded outerwear, retail merch, and anywhere print would feel under-dressed."]]},
+
+  dtf:{title:"Inside Direct-to-Film",kicker:"Production Method — 03",
+    head:"Direct-to-Film (DTF)",
+    lead:"Built for versatility. Detailed artwork, full-color graphics, smaller runs, and fast-turnaround projects without compromising the finish.",
+    cards:[
+      ["01","Full-Color Detail","Photo-grade and gradient-heavy artwork that screens can't economically reproduce."],
+      ["02","Small Runs","Built for the 12–48 piece order — no setup cost penalty, no minimums fight."],
+      ["03","Fast Turnaround","Compressed timelines for events, last-minute drops, and one-off campaigns."],
+      ["04","Garment Flexibility","Works clean across cotton, poly, blends, performance wear, and tricky substrates."],
+      ["05","Layered + Special FX","Multi-color art and specialty effects without rebuilding screens for each variant."],
+      ["06","Best For","Events, drops, prototyping, name/number programs, complex artwork, and tight timelines."]]},
+
+  "merch-systems":{title:"Inside Apparel Systems",kicker:"Operational Infrastructure",
+    head:"Apparel Systems, End To End",
+    lead:"The full operational picture — how Nuclear connects design, ordering, production, fulfillment, and distribution into one centralized apparel system.",
+    cards:[
+      ["A","Design + Curation","Graphics built for the garment. Assortments chosen around audience, use case, and presentation."],
+      ["B","Pop-Up + Campaign Stores","Limited-run stores for launches, fundraisers, seasonal drops, and event-driven merchandise."],
+      ["C","Always-On Stores","Foundational ordering systems for ongoing apparel needs — public and private environments."],
+      ["D","Fulfillment + Inventory","Packing, shipping, distribution, and stocked inventory support for programs that move."],
+      ["E","Centralized Access","Approved products, branding, and merchandise organized for repeat ordering year-round."],
+      ["F","Real Partnership","Ongoing operational support — not order-taking. We stay in it with you as the program grows."]]}
 };
 
 /* ---------- SHELL MARKUP ---------- */
@@ -172,6 +217,11 @@ onScroll.push(()=>{
   const h=document.documentElement;
   const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
   prog.style.width=(p*100).toFixed(2)+"%";
+  // pulse-intensity on float button — scales with scroll depth on pages with a layer context
+  const fb=document.getElementById("floatBtn");
+  if(fb&&fb.classList.contains("charged")){
+    fb.style.setProperty("--pulse",(0.25+p*1.6).toFixed(2));
+  }
 });
 
 /* ---------- REVEAL ON SCROLL ---------- */
@@ -191,6 +241,34 @@ function bindReveals(root=document){
   });
 }
 bindReveals();
+
+/* ---------- HERO STITCH (radiation mark draws itself on scroll) ---------- */
+const stitch=$(".hero-stitch");
+if(stitch){
+  const paths=$$("path,circle",stitch);
+  paths.forEach(p=>{
+    if(p.getAttribute("stroke-dasharray"))return; // outer dashed ring keeps its pattern
+    const len=p.getTotalLength?p.getTotalLength():120;
+    p.style.strokeDasharray=len;
+    p.style.strokeDashoffset=len;
+    p.dataset.len=len;
+  });
+  const hero=stitch.closest(".hero,.page-hero");
+  function tickStitch(){
+    if(!hero)return;
+    const r=hero.getBoundingClientRect();
+    const total=r.height+innerHeight*.4;
+    const passed=Math.max(0,Math.min(1,(innerHeight-r.top)/total));
+    paths.forEach(p=>{
+      if(!p.dataset.len)return;
+      const len=parseFloat(p.dataset.len);
+      p.style.strokeDashoffset=(len*(1-passed)).toFixed(1);
+    });
+    stitch.style.opacity=(.18+passed*.62).toFixed(2);
+    stitch.style.transform=`rotate(${(passed*38).toFixed(1)}deg) scale(${(1+passed*.08).toFixed(3)})`;
+  }
+  onScroll.push(tickStitch);tickStitch();
+}
 
 /* ---------- PARALLAX ---------- */
 const plx=$$("[data-parallax]");

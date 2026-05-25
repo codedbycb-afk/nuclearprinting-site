@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Apparel Production — Screen Printing, Embroidery & DTF | Nuclear Printing</title>
-<meta name="description" content="Nuclear Printing's apparel production floor — design, screen printing, embroidery, and direct-to-film, produced to a retail-quality standard in Cleveland." />
+<meta name="description" content="Nuclear Printing's apparel production floor — screen printing, embroidery, and direct-to-film, produced to a retail-quality standard in Cleveland." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -12,25 +12,60 @@
 </head>
 <body>
 
+<!-- STORIES RAIL -->
+<section class="stories" aria-label="Production stories">
+  <div class="stories-inner" id="stories"></div>
+</section>
+
 <!-- PAGE HERO -->
-<header class="page-hero" data-section="prod-hero" data-cta="See Today's Production" data-layer="production">
+<header class="page-hero" data-section="prod-hero" data-cta="Get a Quote" data-layer="production">
   <div class="hero-bg" data-parallax="0.12"><img src="assets/img/squeegee-bw.jpg" alt="Screen printing on the Nuclear production floor" /></div>
   <div class="wrap page-hero-inner">
     <div class="crumb reveal"><a href="index.html">Home</a> &nbsp;/&nbsp; Apparel Production</div>
     <h1 class="reveal">Apparel Production</h1>
-    <p class="reveal">A fully equipped production facility delivering consistent, high-quality results for every order. From soft-hand prints to precision embroidery — produced with the care and detail demanded by top brands.</p>
-    <div class="hero-actions reveal" style="margin-top:30px">
-      <button class="btn btn-green" data-quote>Start Your Order</button>
-      <button class="btn btn-ghost" data-open-layer="production">Step Onto The Floor</button>
+    <p class="reveal">Lots of companies print ink on shirts. Production is everything that happens before and after that process. Mockups, approvals, communication, timelines, consistency, and execution all work together to create a retail-quality final product. From the first proof to the final delivery, every detail matters when apparel represents for you or your organization.</p>
+
+    <!-- 4 icon boxes (TODO: swap with deck page 10 icons) -->
+    <div class="icon-row reveal">
+      <div class="ic-box">
+        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="10" y="14" width="44" height="36" rx="3"/>
+          <path d="M10 24h44"/>
+          <circle cx="18" cy="19" r="1.6"/>
+          <circle cx="24" cy="19" r="1.6"/>
+          <path d="M22 36h20M22 42h14"/>
+        </svg>
+        <div class="ic-l">Mockups &amp; Approvals</div>
+      </div>
+      <div class="ic-box">
+        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M18 12h22a6 6 0 016 6v28a6 6 0 01-6 6H18z"/>
+          <path d="M24 22h16M24 30h16M24 38h10"/>
+        </svg>
+        <div class="ic-l">Clear Communication</div>
+      </div>
+      <div class="ic-box">
+        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="22"/>
+          <path d="M32 18v14l10 6"/>
+        </svg>
+        <div class="ic-l">Timelines</div>
+      </div>
+      <div class="ic-box">
+        <svg class="ic" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M12 32l14 14 26-28"/>
+        </svg>
+        <div class="ic-l">Consistency &amp; Execution</div>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- STAT STRIP -->
-<section class="section-sm" data-section="prod-stats" data-cta="See Today's Production" data-deep="1">
+<section class="section-sm" data-section="prod-stats" data-cta="Get a Quote" data-deep="1">
   <div class="wrap">
     <div class="stat-strip">
-      <div class="stat reveal"><div class="sn"><span data-count="4">0</span></div><div class="sl">Production Methods</div></div>
+      <div class="stat reveal"><div class="sn"><span data-count="3">0</span></div><div class="sl">Production Methods</div></div>
       <div class="stat reveal"><div class="sn">Retail</div><div class="sl">Quality Standard</div></div>
       <div class="stat reveal"><div class="sn"><span data-count="100" data-suffix="%">0%</span></div><div class="sl">On-Time Philosophy</div></div>
       <div class="stat reveal"><div class="sn">CLE</div><div class="sl">Built &amp; Based</div></div>
@@ -38,52 +73,51 @@
   </div>
 </section>
 
-<!-- DETAIL BLOCKS -->
-<section class="section" data-section="prod-detail" data-cta="Explore Apparel Production" data-layer="production">
+<!-- THE PRODUCTION FLOOR -->
+<section class="section" data-section="prod-detail" data-cta="Get a Quote">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">The Production Floor</div>
-      <h2>Four Ways We Build Apparel</h2>
-      <p class="lead">Every method runs to the same standard — sharp detail, accurate color, and quality that lasts.</p>
+      <h2>How Nuclear Builds Apparel</h2>
+      <p class="lead">Nuclear builds apparel through three core production methods: screen printing, embroidery, and direct-to-film. Each process serves a different purpose depending on the garment, artwork, quantity, and overall look you're trying to achieve.</p>
     </div>
 
-    <div class="detail">
-      <div class="d-visual reveal-l"><img src="assets/img/svc-brand.jpg" alt="Design"/><span class="tag">01 — Design</span></div>
-      <div class="d-text reveal-r"><div class="ix">01</div><h2>Design</h2>
-        <p>Great apparel starts before the press. Concepts are built for production from the ground up — clean, intentional artwork designed to translate exactly the way it should onto every garment.</p>
-        <div class="mini"><div>Production-first concepting</div><div>Built for screen, stitch, and film</div><div>Clear, confident direction</div></div>
+    <div class="detail big">
+      <div class="d-visual reveal-l"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/><span class="tag">01 — Screen Printing</span></div>
+      <div class="d-text reveal-r"><div class="ix">01</div><h2>Screen Printing</h2>
+        <p>Screen printing is the foundation of modern apparel production and remains the industry standard for retail-quality merchandise, team apparel, uniforms, and large-scale orders. Built for durability, consistency, and visual impact, it's the go-to production method for organizations and people that want apparel to look professional, cohesive, and built to last.</p>
+        <div class="mini">
+          <div>Industry-standard retail quality</div>
+          <div>Built for durability &amp; consistency</div>
+          <div>Scales to large orders without losing detail</div>
+        </div>
+        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="screen">Inside Screen Printing</button></div>
       </div>
     </div>
 
-    <div class="detail flip">
-      <div class="d-visual reveal-r"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/><span class="tag">02 — Screen Printing</span></div>
-      <div class="d-text reveal-l"><div class="ix">02</div><h2>Screen Printing</h2>
-        <p>At the core of Nuclear is our craft. Soft-hand prints produced with advanced equipment and skilled craftsmanship — ensuring sharp detail, accurate color, and quality that holds up wash after wash.</p>
-        <div class="mini"><div>Soft-hand, retail-quality prints</div><div>Accurate, consistent color</div><div>Built for companies that care</div></div>
+    <div class="detail big flip">
+      <div class="d-visual reveal-r"><img src="assets/img/embroidery.jpg" alt="Embroidery"/><span class="tag">02 — Embroidery</span></div>
+      <div class="d-text reveal-l"><div class="ix">02</div><h2>Embroidery</h2>
+        <p>Embroidery is the premium standard for polished, professional apparel. From corporate uniforms and hospitality programs to retail merchandise and branded outerwear, embroidery adds texture, durability, and elevated presentation that instantly separates apparel from standard printed goods.</p>
+        <div class="mini">
+          <div>Premium, polished finish</div>
+          <div>Uniforms, hospitality &amp; outerwear</div>
+          <div>Texture &amp; durability that elevates the garment</div>
+        </div>
+        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="embroidery">Inside Embroidery</button></div>
       </div>
     </div>
 
-    <div class="detail">
-      <div class="d-visual reveal-l"><img src="assets/img/embroidery.jpg" alt="Embroidery"/><span class="tag">03 — Embroidery</span></div>
-      <div class="d-text reveal-r"><div class="ix">03</div><h2>Embroidery</h2>
-        <p>Precision embroidery on caps, uniforms, and premium apparel — every piece produced with the same care and detail demanded by top brands. Reliable, efficient, and consistent across every order.</p>
-        <div class="mini"><div>Caps, uniforms &amp; premium apparel</div><div>Sharp, precise stitch detail</div><div>Consistent run-to-run</div></div>
-      </div>
-    </div>
-
-    <div class="detail flip">
-      <div class="d-visual reveal-r"><img src="assets/img/ink.jpg" alt="Direct to Film"/><span class="tag">04 — Direct to Film</span></div>
-      <div class="d-text reveal-l"><div class="ix">04</div><h2>Direct to Film</h2>
-        <p>Full-color, detail-heavy prints with versatility across every garment type. DTF opens up complex artwork and small runs without compromising the finish — flexible output, retail-quality result.</p>
-        <div class="mini"><div>Full-color, detail-heavy artwork</div><div>Versatile across garment types</div><div>Strong for complex designs</div></div>
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="d-visual reveal-l"><img src="assets/img/refinement.jpg" alt="File Refinement"/><span class="tag">05 — File Refinement</span></div>
-      <div class="d-text reveal-r"><div class="ix">05</div><h2>File Refinement</h2>
-        <p>Whether your artwork was created in Canva, generated with AI, or designed years ago, we rebuild and optimize every element for flawless printing. Logos are vectorized, colors standardized, and files formatted for consistency across all apparel and products.</p>
-        <div class="mini"><div>Vectorized, production-ready logos</div><div>Standardized colors &amp; formats</div><div>Clean digital asset library delivered</div></div>
+    <div class="detail big">
+      <div class="d-visual reveal-l"><img src="assets/img/ink.jpg" alt="Direct to Film"/><span class="tag">03 — Direct-to-Film (DTF)</span></div>
+      <div class="d-text reveal-r"><div class="ix">03</div><h2>Direct-to-Film (DTF)</h2>
+        <p>Direct-to-film gives apparel production the flexibility to handle detailed artwork, full-color graphics, smaller runs, and fast-turnaround projects without sacrificing visual quality. It's a modern production method built for versatility, allowing brands, organizations, and events to produce clean professional apparel with speed and consistency.</p>
+        <div class="mini">
+          <div>Detailed artwork &amp; full-color graphics</div>
+          <div>Built for small runs &amp; fast turnarounds</div>
+          <div>Versatile across garment types</div>
+        </div>
+        <div class="d-cta"><button class="btn btn-ghost" data-open-layer="dtf">Inside DTF</button></div>
       </div>
     </div>
   </div>

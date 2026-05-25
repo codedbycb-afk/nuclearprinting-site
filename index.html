@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nuclear Printing — Apparel Production & Merchandising Systems | Cleveland</title>
-<meta name="description" content="Nuclear Printing is a full-scale apparel production company in downtown Cleveland — retail-quality screen printing, embroidery, online ordering systems, and brand development." />
+<title>Nuclear Printing — Retail-Quality Screen Printing & Embroidery | Cleveland</title>
+<meta name="description" content="Nuclear Printing is a full-scale apparel production company in downtown Cleveland — retail-quality screen printing, embroidery, DTF, and merchandising systems built for businesses, teams, schools, and brands." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- STORIES RAIL -->
+<!-- STORIES RAIL (injected by app.js on every page) -->
 <section class="stories" aria-label="Production stories">
   <div class="stories-inner" id="stories"></div>
 </section>
@@ -20,123 +20,156 @@
 <!-- HERO -->
 <header class="hero" data-section="hero" data-cta="Get a Quote">
   <div class="hero-bg" data-parallax="0.14"><img src="assets/img/press-bw.jpg" alt="Nuclear Printing production floor" /></div>
+
+  <!-- scroll-stitch radiation mark (original Claude Design signature) -->
+  <svg class="hero-stitch" viewBox="0 0 200 200" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="100" cy="100" r="14" />
+      <path d="M100 30 L100 70" />
+      <path d="M100 130 L100 170" />
+      <path d="M30 100 L70 100" />
+      <path d="M130 100 L170 100" />
+      <path d="M50 50 L78 78" />
+      <path d="M122 122 L150 150" />
+      <path d="M150 50 L122 78" />
+      <path d="M78 122 L50 150" />
+      <circle cx="100" cy="100" r="60" stroke-dasharray="6 8" />
+    </g>
+  </svg>
+
   <div class="wrap hero-inner">
     <div class="eyebrow reveal">Apparel Production · Cleveland, Ohio</div>
-    <h1 class="reveal">We make sure your team <span class="g">stands out.</span></h1>
-    <p class="hero-sub reveal">When it matters how your team shows up, <b>we deliver apparel that performs.</b></p>
-    <p class="hero-p reveal">Nuclear Printing is a full-scale apparel production company in downtown Cleveland — retail-quality screen printing, embroidery, online ordering systems, and brand development, executed with clarity, speed, and consistency on every order.</p>
-    <div class="hero-actions reveal">
-      <button class="btn btn-green" data-quote>Start Your Order</button>
-      <a class="btn btn-ghost" href="#production">Explore Production</a>
-    </div>
-    <div class="hero-meta reveal">
-      <div><div class="n">Retail</div><div class="l">Quality Standard</div></div>
-      <div><div class="n">On Time</div><div class="l">Every Order</div></div>
-      <div><div class="n">Cleveland</div><div class="l">Built &amp; Based</div></div>
+    <h1 class="reveal">Retail-quality screen printing <span class="g">and embroidery.</span></h1>
+    <p class="hero-sub reveal">For people and organizations who value consistency and clarity, we make ordering merchandise effortless.</p>
+    <p class="hero-p reveal">Nuclear Printing is a full-scale apparel production company built for businesses, teams, schools, events, individuals, bands, and brands that want the process handled properly from start to finish. Whether you need a few dozen shirts or a fully managed online ordering system, we keep the process simple, communication clear, and production retail-quality every step of the way.</p>
+
+    <div class="hero-pills reveal" role="list">
+      <a class="pill" href="#quote" data-quote role="listitem">
+        <span class="pill-k">Quoting</span><span class="pill-v">Fast &amp; Reliable</span>
+      </a>
+      <a class="pill" href="#quote" data-quote role="listitem">
+        <span class="pill-k">On Time</span><span class="pill-v">Every Order</span>
+      </a>
+      <a class="pill" href="#quote" data-quote role="listitem">
+        <span class="pill-k">Repeatable</span><span class="pill-v">Order Processing</span>
+      </a>
     </div>
   </div>
 </header>
 
-<!-- APPAREL PRODUCTION -->
+<!-- 01 — APPAREL PRODUCTION (3 large tiles) -->
 <section class="section production" id="production"
          data-section="production" data-cta="Explore Apparel Production" data-layer="production">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">01 — The Production Floor</div>
       <h2>Apparel Production</h2>
-      <p class="lead">A fully equipped production facility delivering consistent, retail-quality results for every order. Step deeper into the floor.</p>
+      <p class="lead">Three core production methods, each held to the same retail-quality standard. Step deeper into the floor to see how the work is built.</p>
     </div>
-    <div class="prod-grid">
-      <article class="prod-card reveal"><div class="pc-bg"><img src="assets/img/svc-brand.jpg" alt="Design"/></div>
-        <div class="pc-body"><div class="pc-num">01</div><h3>Design</h3>
-        <p>Concepts built for production — clean, intentional artwork from the ground up.</p></div></article>
-      <article class="prod-card reveal"><div class="pc-bg"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/></div>
-        <div class="pc-body"><div class="pc-num">02</div><h3>Screen Printing</h3>
-        <p>Soft-hand prints with sharp detail, accurate color, and quality that lasts.</p></div></article>
-      <article class="prod-card reveal"><div class="pc-bg"><img src="assets/img/embroidery.jpg" alt="Embroidery"/></div>
-        <div class="pc-body"><div class="pc-num">03</div><h3>Embroidery</h3>
-        <p>Precision embroidery produced with the care and detail demanded by top brands.</p></div></article>
-      <article class="prod-card reveal"><div class="pc-bg"><img src="assets/img/ink.jpg" alt="Direct to Film"/></div>
-        <div class="pc-body"><div class="pc-num">04</div><h3>Direct to Film</h3>
-        <p>Full-color, detail-heavy prints — versatile output across every garment type.</p></div></article>
+
+    <div class="prod-grid three">
+      <article class="prod-card big reveal">
+        <div class="pc-bg"><img src="assets/img/screenprint.jpg" alt="Screen Printing"/></div>
+        <div class="pc-body">
+          <div class="pc-num">01</div>
+          <h3>Screen Printing</h3>
+          <p>Retail-quality, industry-standard screen printing for scalable apparel production.</p>
+        </div>
+      </article>
+      <article class="prod-card big reveal">
+        <div class="pc-bg"><img src="assets/img/embroidery.jpg" alt="Embroidery"/></div>
+        <div class="pc-body">
+          <div class="pc-num">02</div>
+          <h3>Embroidery</h3>
+          <p>Retail-quality embroidery for uniforms, headwear, and premium apparel.</p>
+        </div>
+      </article>
+      <article class="prod-card big reveal">
+        <div class="pc-bg"><img src="assets/img/ink.jpg" alt="Direct-to-Film"/></div>
+        <div class="pc-body">
+          <div class="pc-num">03</div>
+          <h3>Direct-to-Film (DTF)</h3>
+          <p>Full-color and specialty decoration for small runs and flexible applications.</p>
+        </div>
+      </article>
     </div>
-    <div style="margin-top:34px" class="reveal">
+
+    <div style="margin-top:40px" class="reveal">
       <a class="btn btn-ghost" href="apparel-production.html">View Apparel Production</a>
     </div>
   </div>
 </section>
 
-<!-- MERCHANDISING SYSTEMS -->
+<!-- 02 — OPERATIONAL INFRASTRUCTURE / MERCHANDISING SYSTEMS -->
 <section class="section merch" id="merch"
          data-section="merch" data-cta="Explore Merchandising Systems" data-layer="merch">
   <div class="wrap merch-split">
     <div class="merch-visual reveal-l">
-      <img src="assets/img/ordering.jpg" alt="Online ordering system" />
-      <span class="badge">Online Ordering Tools</span>
+      <!-- TODO: replace with "lady ordering at desktop computer" photo -->
+      <img src="assets/img/ordering.jpg" alt="Online ordering system on desktop" />
+      <span class="badge">Online Ordering · Desktop</span>
     </div>
     <div class="reveal-r">
       <div class="eyebrow">02 — Operational Infrastructure</div>
       <h2 style="font-size:clamp(30px,4.4vw,52px);margin-top:12px">Merchandising Systems</h2>
-      <p class="lead" style="margin-top:14px">Nuclear is an apparel <em>systems</em> company — not simply a production vendor. We build the infrastructure that keeps ordering organized, repeatable, and on-brand.</p>
+      <p class="lead" style="margin-top:14px">Merchandising Systems are built to simplify how organizations order, manage, and distribute apparel. From always-on online stores and campaign merch drops to product curation, fulfillment, and inventory support, Nuclear creates organized apparel systems that keep everything connected, consistent, and easy to manage.</p>
       <div class="merch-list">
-        <div class="row"><div class="ix">A</div><div class="tx"><b>Online Ordering Tools</b>
-          <span>A simple, organized way for your team to order exactly what they need — no spreadsheets, no back-and-forth.</span></div></div>
-        <div class="row"><div class="ix">B</div><div class="tx"><b>Custom Branded Stores</b>
-          <span>Built specifically for you — your branding, approved designs, a curated lineup that stays consistent.</span></div></div>
-        <div class="row"><div class="ix">C</div><div class="tx"><b>Setup to Fulfillment</b>
-          <span>Outfitting a team, running a program, or selling merch — we handle it end to end.</span></div></div>
+        <div class="row"><div class="ix">A</div><div class="tx"><b>Ordering Infrastructure</b>
+          <span>Ordering systems built to keep apparel organized, accessible, and easy to reorder year-round.</span></div></div>
+        <div class="row"><div class="ix">B</div><div class="tx"><b>Stores + Campaigns</b>
+          <span>Launch branded online stores, merch drops, and limited campaigns without the stress of managing orders manually.</span></div></div>
+        <div class="row"><div class="ix">C</div><div class="tx"><b>Design + Curation</b>
+          <span>Retail-minded apparel design and product selection built to make your organization look consistent and professional.</span></div></div>
+        <div class="row"><div class="ix">D</div><div class="tx"><b>Full Process Support</b>
+          <span>From packing and shipping to fulfillment and distribution, Nuclear helps manage the movement of apparel from production floor to final delivery.</span></div></div>
       </div>
-      <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
-        <button class="btn btn-ghost" data-open-layer="merch">Explore A Real System</button>
-        <a class="btn btn-ghost" href="merchandising-systems.html">View Merchandising</a>
+      <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-ghost" href="merchandising-systems.html">View Merchandising Systems</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY NUCLEAR -->
-<section class="section why" id="why" data-section="why" data-cta="Inside Nuclear" data-deep="1">
+<!-- BRAND MARQUEE (boutique catalog — links to resources) -->
+<section class="section brands" data-section="brands" data-cta="See Our Brands" aria-label="Apparel brand catalog">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">03 — Why Nuclear</div>
-      <h2>Built On A Real Partnership</h2>
-      <p class="lead">Craftsmanship and technology, working hand in hand — for businesses that care how their brand shows up in the real world.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-item reveal"><div class="dot"></div><p>Fast and reliable quoting</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Clear communication</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Retail-quality production</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Completed on time</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Organized, standardized workflows</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Production-ready artwork</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Online ordering infrastructure</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>A real partnership — not order-taking</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Repeatable ordering process</p></div>
-      <div class="why-item reveal"><div class="dot"></div><p>Trusted by hospitality &amp; corporate teams</p></div>
+    <div class="brands-head reveal">
+      <div class="eyebrow">Boutique &amp; Retail Catalog</div>
+      <h2>Premium Apparel Brands We Print</h2>
+      <p class="lead">Beyond the standard catalog. Boutique and retail-grade blanks for organizations that care how their merchandise feels and shows up.</p>
     </div>
   </div>
-</section>
-
-<!-- BLOG TEASER -->
-<section class="section blog" id="blog" data-section="blog" data-cta="Get a Quote">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">04 — The Intelligence Layer</div>
-      <h2>From The Floor</h2>
-      <p class="lead">Insights on apparel production, merchandising systems, and the craft behind a brand that shows up right.</p>
+  <a href="faq.html" class="brand-marquee" aria-label="View resources">
+    <div class="bm-track">
+      <span>Travis Mathew</span><span>·</span>
+      <span>As Colour</span><span>·</span>
+      <span>LA Apparel</span><span>·</span>
+      <span>Comfort Colors</span><span>·</span>
+      <span>Independent Trading</span><span>·</span>
+      <span>Champion</span><span>·</span>
+      <span>Bella + Canvas</span><span>·</span>
+      <span>Richardson</span><span>·</span>
+      <span>Carhartt</span><span>·</span>
+      <span>Next Level</span><span>·</span>
+      <span>Stanley/Stella</span><span>·</span>
+      <span>Lost Art</span><span>·</span>
+      <!-- duplicate for seamless loop -->
+      <span>Travis Mathew</span><span>·</span>
+      <span>As Colour</span><span>·</span>
+      <span>LA Apparel</span><span>·</span>
+      <span>Comfort Colors</span><span>·</span>
+      <span>Independent Trading</span><span>·</span>
+      <span>Champion</span><span>·</span>
+      <span>Bella + Canvas</span><span>·</span>
+      <span>Richardson</span><span>·</span>
+      <span>Carhartt</span><span>·</span>
+      <span>Next Level</span><span>·</span>
+      <span>Stanley/Stella</span><span>·</span>
+      <span>Lost Art</span><span>·</span>
     </div>
-    <div class="blog-grid">
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Production</div>
-        <h3>Soft-Hand vs. Standard Prints — What Your Brand Actually Needs</h3>
-        <div class="meta">Apparel Production · 4 min</div></a>
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Merch Systems</div>
-        <h3>Why Company Apparel Belongs On An Online Ordering System</h3>
-        <div class="meta">Merchandising · 5 min</div></a>
-      <a class="blog-card reveal" href="blog.html"><div class="tag">File Setup</div>
-        <h3>Production-Ready Artwork: The Gap Between Canva And The Press</h3>
-        <div class="meta">File Refinement · 3 min</div></a>
-    </div>
-    <div style="margin-top:32px" class="reveal"><a class="btn btn-ghost" href="blog.html">Read The Blog</a></div>
+  </a>
+  <div class="wrap" style="text-align:center;margin-top:34px">
+    <a class="btn btn-ghost reveal" href="faq.html">View Brand Resources</a>
   </div>
 </section>
 
