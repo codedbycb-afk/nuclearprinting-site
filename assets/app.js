@@ -194,7 +194,7 @@ document.body.insertAdjacentHTML("beforeend",`
       data-layout-iframe-id="inline-16ntRlFvNC5ZfJGQzJtN"
       data-form-id="16ntRlFvNC5ZfJGQzJtN"
       loading="lazy"
-      style="width:100%;border:0;display:block;background:#0a0a0a"></iframe>
+      style="width:100%;border:0;display:block;background:#ffffff"></iframe>
   </div>
 </div>
 <div class="story-viewer" id="storyViewer">

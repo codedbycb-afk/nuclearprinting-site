@@ -445,7 +445,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 }
 
 /* ---------- FLOATING BUTTON ---------- */
-.float-btn{position:fixed;right:30px;bottom:30px;z-index:90;
+.float-btn{position:fixed;right:30px;top:50%;margin-top:-28px;z-index:90;
   display:flex;align-items:center;gap:11px;cursor:pointer;
   background:var(--panel);border:1px solid var(--green);border-radius:46px;
   padding:13px 22px 13px 14px;
@@ -622,7 +622,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   .page-hero-inner{padding:130px 0 56px}
   .hero-meta{gap:20px}
   .footer-top{flex-direction:column}
-  .float-btn{right:16px;bottom:16px;padding:11px 18px 11px 12px}
+  .float-btn{right:16px;top:50%;margin-top:-24px;bottom:auto;padding:11px 18px 11px 12px}
   .float-btn .fb-text{font-size:12px}
   .layer{width:96vw;height:92vh}
   .layer-body{padding:24px;height:calc(92vh - 67px)}
