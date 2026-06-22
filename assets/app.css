@@ -100,6 +100,8 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(105deg,rgba(9,9,9,.96) 28%,rgba(9,9,9,.6) 62%,rgba(9,9,9,.85))}
 .hero-inner{position:relative;z-index:2;padding:140px 0 90px}
+.hero-logo{display:block;width:min(420px,82vw);height:auto;margin:0 0 30px;
+  filter:drop-shadow(0 6px 26px rgba(0,0,0,.45))}
 .hero h1{font-size:clamp(46px,8.4vw,108px);max-width:14ch;margin:20px 0 0}
 .hero h1 .g{color:var(--green)}
 .hero-sub{font-family:var(--sub);font-weight:400;text-transform:uppercase;
