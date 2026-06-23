@@ -459,7 +459,9 @@ document.addEventListener("click",e=>{
   const q=e.target.closest("[data-quote]");
   if(q){e.preventDefault();goQuote();return;}
   const l=e.target.closest("[data-open-layer]");
-  if(l){e.preventDefault();openLayer(l.dataset.openLayer);}
+  if(l){e.preventDefault();openLayer(l.dataset.openLayer);return;}
+  // every other button / interactive control gets the same click sound
+  if(e.target.closest("button,.btn,.story,.story-ring")) pshh();
 });
 
 /* expose for inline use if needed */
