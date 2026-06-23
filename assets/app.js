@@ -111,7 +111,7 @@ document.body.insertAdjacentHTML("afterbegin",`
 <div class="scroll-prog" id="scrollProg"></div>
 <nav class="nav" id="nav">
   <a class="brand" href="index.html" aria-label="Nuclear Printing home">
-    <img src="assets/logo-symbol.png" alt="Nuclear Printing" />
+    <img src="assets/logo-mark-green.png" alt="Nuclear Printing" />
     <span><span class="bt">Nuclear Printing</span>
     <span class="bs">Apparel Production · Merchandising Systems</span></span>
   </a>
@@ -129,7 +129,7 @@ document.body.insertAdjacentHTML("beforeend",`
 <section class="lets-start" id="quote">
   <div class="ls-bg"><img src="assets/img/squeegee-bw.jpg" alt="Nuclear Printing production floor"/></div>
   <div class="wrap ls-inner reveal">
-    <div class="ls-mark"><img src="assets/logo-lockup-white.png" alt="Nuclear Printing — Apparel Production | Merchandising Systems"/></div>
+    <div class="ls-mark"><img src="assets/logo-symbol.png" alt="Nuclear Printing"/></div>
     <h2>Let's Get Started</h2>
     <p class="ls-tag">When it matters how your team shows up, <b>we make sure they stand out.</b></p>
     <p class="ls-p">We deliver apparel that helps your team appear as professional as they perform. From fresh artwork and updated uniforms to full-scale merch programs, we bring clarity, speed, and quality to every order.</p>
