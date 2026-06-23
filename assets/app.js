@@ -213,7 +213,7 @@ document.body.insertAdjacentHTML("beforeend",`
 let clickAudio;
 function pshh(){
   try{
-    if(!clickAudio){clickAudio=new Audio("assets/click-sound.mp3");clickAudio.volume=0.7;}
+    if(!clickAudio){clickAudio=new Audio("assets/click-sound.mp3?v=2");clickAudio.volume=0.7;}
     clickAudio.currentTime=0;
     clickAudio.play().catch(()=>{});
   }catch(e){}
