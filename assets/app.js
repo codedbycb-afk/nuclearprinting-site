@@ -391,12 +391,13 @@ sv.addEventListener("click",e=>{if(e.target===sv)closeStory();});
 
 /* ---------- FLOATING BUTTON — contextual state machine ---------- */
 const fb=$("#floatBtn"),fbText=$("#fbText");
-let currentLayer=null;
+let currentLayer=null,currentHref=null;
 const secObs=new IntersectionObserver(es=>{
   es.forEach(e=>{
     if(e.isIntersecting&&e.intersectionRatio>.4){
       const t=e.target;
       currentLayer=t.dataset.layer||null;
+      currentHref=t.dataset.href||null;
       const cta=t.dataset.cta||"Get a Quote";
       if(fbText.textContent!==cta){
         animate(fb,{opacity:[1,.35,1]},{duration:.45});
@@ -427,6 +428,7 @@ fb.addEventListener("mouseleave",()=>{hovering=false;tx=0;ty=0;});
   requestAnimationFrame(inertia);
 })();
 function fbAction(){
+  if(currentHref){pshh();location.href=currentHref;return;}
   pshh();fb.classList.remove("idle");fb.classList.add("shake");
   setTimeout(()=>fb.classList.remove("shake"),400);
   currentLayer?openLayer(currentLayer):goQuote();

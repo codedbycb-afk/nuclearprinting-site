@@ -102,11 +102,11 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 .hero-inner{position:relative;z-index:2;padding:140px 0 90px}
 .hero h1{font-size:clamp(46px,8.4vw,108px);max-width:14ch;margin:20px 0 0}
 .hero h1 .g{color:var(--green)}
-.hero-sub{font-family:var(--sub);font-weight:400;text-transform:uppercase;
+.hero-sub{font-family:var(--sub);font-weight:700;text-transform:uppercase;
   letter-spacing:.04em;font-size:clamp(17px,2vw,23px);color:var(--light);
-  margin:26px 0 0;max-width:30ch}
+  margin:26px 0 0;max-width:56ch}
 .hero-sub b{color:var(--green);font-weight:600}
-.hero-p{margin:22px 0 0;max-width:54ch;color:var(--muted);font-size:18px}
+.hero-p{margin:22px 0 0;max-width:72ch;color:var(--muted);font-size:18px}
 .hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
 .hero-actions .btn{padding:16px 32px;font-size:15px}
 .hero-meta{display:flex;gap:34px;margin-top:54px;flex-wrap:wrap}
@@ -451,7 +451,9 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   padding:13px 22px 13px 14px;
   box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 0 0 var(--green-glow);
   transition:box-shadow .5s var(--ease),background .35s var(--ease),border-color .35s;
-  will-change:transform}
+  will-change:transform;animation:fbpulse 2.4s var(--ease) infinite}
+@keyframes fbpulse{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 0 0 rgba(45,176,134,.45)}
+  50%{box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 26px 7px rgba(45,176,134,.5)}}
 .float-btn .fb-orb{width:30px;height:30px;border-radius:50%;flex:0 0 auto;
   background:radial-gradient(circle at 35% 30%,var(--green),var(--green-dim));position:relative}
 .float-btn .fb-orb::after{content:"";position:absolute;inset:-6px;border-radius:50%;
