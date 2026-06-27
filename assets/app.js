@@ -466,3 +466,17 @@ document.addEventListener("click",e=>{
 
 /* expose for inline use if needed */
 window.NUCLEAR={openLayer,openStory,goQuote};
+
+/* ---------- FAILSAFE: never leave the page scroll-locked ----------
+   A page restored from back/forward (bfcache) can keep body.layer-open
+   (overflow:hidden) and a stuck overlay, which freezes scrolling after
+   switching pages. Clear it whenever the page is shown. */
+function __unlockPage(){
+  document.body.classList.remove("layer-open");
+  document.querySelectorAll(
+    ".layer.on,.layer-scrim.on,.quote-modal.on,.quote-scrim.on,.story-viewer.on,.mnav.on"
+  ).forEach(el=>el.classList.remove("on"));
+  clearTimeout(svTimer);
+}
+addEventListener("pageshow",__unlockPage);
+addEventListener("popstate",__unlockPage);
