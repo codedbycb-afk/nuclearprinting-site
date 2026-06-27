@@ -285,6 +285,10 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 .detail.big .d-text p{font-size:18px;margin-top:18px;line-height:1.65}
 .detail.big .d-visual{aspect-ratio:5/4}
 .d-cta{margin-top:28px}
+/* Merchandising Systems page — Joe revisions 2026-06-24 */
+.page-hero .ms-intro{color:var(--light);font-weight:700;font-size:clamp(18px,1.8vw,22px);max-width:66ch;line-height:1.5}
+[data-section="merch-detail"] .section-head{margin-bottom:14px}
+[data-section="merch-detail"] .section-head + .detail.big{padding-top:30px}
 .detail:last-child{border-bottom:0}
 .detail.flip .d-visual{order:2}
 .d-visual{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);
