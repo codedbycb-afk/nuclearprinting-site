@@ -15,7 +15,7 @@ const HOME = PAGE==="index.html"||PAGE==="";
 const NAV=[
   ["apparel-production.html","Apparel Production"],
   ["merchandising-systems.html","Merchandising Systems"],
-  ["faq.html","Resources"],
+  ["resources.html","Resources"],
   ["blog.html","Blog"],
   ["faq.html","FAQ"],
 ];
@@ -154,7 +154,7 @@ document.body.insertAdjacentHTML("beforeend",`
     <div class="ls-bot">
       <a href="apparel-production.html">Apparel Production</a>
       <a href="merchandising-systems.html">Merchandising Systems</a>
-      <a href="faq.html">Resources</a>
+      <a href="resources.html">Resources</a>
       <a href="blog.html">Blog</a>
       <span class="ls-copy">© ${yr} Nuclear Printing</span>
     </div>

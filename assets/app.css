@@ -289,6 +289,18 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 .page-hero .ms-intro{color:var(--light);font-weight:700;font-size:clamp(18px,1.8vw,22px);max-width:66ch;line-height:1.5}
 [data-section="merch-detail"] .section-head{margin-bottom:14px}
 [data-section="merch-detail"] .section-head + .detail.big{padding-top:30px}
+/* Resources page — brand catalog */
+.brand-cat{margin-top:54px}
+.brand-cat:first-child{margin-top:0}
+.brand-cat .eyebrow{margin-bottom:20px}
+.brand-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.brand-card{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);border-radius:4px;
+  padding:30px 28px;transition:border-color .3s var(--ease),transform .3s var(--ease),background .3s var(--ease)}
+.brand-card:hover{border-color:var(--green);transform:translateY(-3px);background:rgba(45,176,134,.05)}
+.brand-card .bc-name{font-family:var(--head);font-size:24px;line-height:1.1;color:var(--light)}
+.brand-card .bc-go{font-family:var(--sub);text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--green)}
+@media(max-width:900px){.brand-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.brand-cards{grid-template-columns:1fr}}
 .detail:last-child{border-bottom:0}
 .detail.flip .d-visual{order:2}
 .d-visual{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);
