@@ -460,8 +460,8 @@ document.addEventListener("click",e=>{
   if(q){e.preventDefault();goQuote();return;}
   const l=e.target.closest("[data-open-layer]");
   if(l){e.preventDefault();openLayer(l.dataset.openLayer);return;}
-  // every other button / interactive control gets the same click sound — except close (×) buttons
-  if(e.target.closest("button,.btn,.story,.story-ring") && !e.target.closest(".mclose,.layer-close,.qm-close,.sv-close")) pshh();
+  // every other button / interactive control gets the same click sound — except close (×) buttons and FAQ toggles
+  if(e.target.closest("button,.btn,.story,.story-ring") && !e.target.closest(".mclose,.layer-close,.qm-close,.sv-close,.faq-q")) pshh();
 });
 
 /* expose for inline use if needed */
