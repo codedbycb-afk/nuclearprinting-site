@@ -80,6 +80,9 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   border-bottom:1px solid var(--line);padding:84px 0 0}
 .stories-inner{display:flex;gap:20px;overflow-x:auto;padding:18px 32px 20px;scrollbar-width:none}
 .stories-inner::-webkit-scrollbar{display:none}
+/* center the rail; auto margins collapse to 0 on overflow so nothing clips when it scrolls */
+.stories-inner>.story:first-child{margin-left:auto}
+.stories-inner>.story:last-child{margin-right:auto}
 .story{flex:0 0 auto;width:74px;text-align:center;cursor:pointer}
 .story-ring{width:74px;height:74px;border-radius:50%;padding:3px;
   background:conic-gradient(from 140deg,var(--green),var(--green-dim),var(--green));
