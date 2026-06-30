@@ -34,11 +34,13 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 
 /* ---------- NAV ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:80;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 32px;transition:background .4s var(--ease),border-color .4s var(--ease),padding .4s var(--ease);
+  padding:18px 0;transition:background .4s var(--ease),border-color .4s var(--ease),padding .4s var(--ease);
   border-bottom:1px solid transparent}
+/* inner column matches .wrap exactly so the nav lines up with page content (not full-bleed) */
+.nav-inner{max-width:1240px;margin:0 auto;width:100%;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between}
 .nav.scrolled{background:rgba(9,9,9,.86);backdrop-filter:blur(14px);
-  border-bottom-color:var(--line);padding:12px 32px}
+  border-bottom-color:var(--line);padding:12px 0}
 .brand{display:flex;align-items:center;gap:12px}
 .brand img{height:34px;width:auto}
 .brand .bt{font-family:var(--head);font-size:19px;letter-spacing:.02em;text-transform:uppercase}
@@ -78,7 +80,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 /* ---------- STORIES RAIL ---------- */
 .stories{position:relative;z-index:60;background:var(--black);
   border-bottom:1px solid var(--line);padding:84px 0 0}
-.stories-inner{display:flex;gap:20px;overflow-x:auto;padding:18px 32px 20px;scrollbar-width:none}
+.stories-inner{display:flex;gap:34px;overflow-x:auto;padding:18px 32px 22px;scrollbar-width:none}
 .stories-inner::-webkit-scrollbar{display:none}
 /* center the rail; auto margins collapse to 0 on overflow so nothing clips when it scrolls */
 .stories-inner>.story:first-child{margin-left:auto}
@@ -98,7 +100,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 
 /* ---------- HERO (home) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform}
+.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;pointer-events:none}
 .hero-bg img{width:100%;height:120%;object-fit:cover;filter:grayscale(1) contrast(1.06)}
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(105deg,rgba(9,9,9,.96) 28%,rgba(9,9,9,.6) 62%,rgba(9,9,9,.85))}
@@ -182,7 +184,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 
 /* AP HERO — cinematic, no CTAs */
 .ap-hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden}
-.ap-hero .hero-bg{position:absolute;inset:0;z-index:0}
+.ap-hero .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
 .ap-hero .hero-bg img{width:100%;height:120%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(.62)}
 .ap-hero .hero-bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(115deg,rgba(9,9,9,.94) 30%,rgba(9,9,9,.55) 65%,rgba(9,9,9,.85))}
@@ -419,7 +421,8 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 /* ---------- LET'S GET STARTED (deck page 9 layout) ---------- */
 .lets-start{position:relative;overflow:hidden;padding:120px 0 56px;text-align:center;
   border-top:1px solid var(--line)}
-.lets-start .ls-bg{position:absolute;inset:0;z-index:0}
+.lets-start .ls-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.lets-start .ls-inner,.lets-start .ls-icons,.lets-start .btn-start,.lets-start .ls-bot,.lets-start .ls-meta{position:relative;z-index:3}
 .lets-start .ls-bg img{width:100%;height:100%;object-fit:cover;
   filter:grayscale(1) contrast(1.05) brightness(.32)}
 .lets-start .ls-bg::after{content:"";position:absolute;inset:0;
@@ -631,8 +634,9 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 @media(max-width:720px){
   body{font-size:17px}
   .wrap{padding:0 20px}
-  .nav{padding:14px 20px}
-  .nav.scrolled{padding:10px 20px}
+  .nav{padding:14px 0}
+  .nav.scrolled{padding:10px 0}
+  .nav-inner{padding:0 20px}
   .nav-links,.nav-cta{display:none}
   .burger{display:flex}
   .prod-grid,.prod-grid.three,.why-grid,.blog-grid,.layer-cards,.stat-strip,.icon-row,.pillar-grid{grid-template-columns:1fr}

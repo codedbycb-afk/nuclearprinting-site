@@ -118,14 +118,16 @@ const yr=new Date().getFullYear();
 document.body.insertAdjacentHTML("afterbegin",`
 <div class="scroll-prog" id="scrollProg"></div>
 <nav class="nav" id="nav">
-  <a class="brand" href="index.html" aria-label="Nuclear Printing home">
-    <img src="assets/logo-mark-green.png" alt="Nuclear Printing" />
-    <span><span class="bt">Nuclear Printing</span>
-    <span class="bs">Apparel Production · Merchandising Systems</span></span>
-  </a>
-  <div class="nav-links">${navLinks}</div>
-  <button class="btn btn-green nav-cta" data-quote>Get a Quote</button>
-  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Nuclear Printing home">
+      <img src="assets/logo-mark-green.png" alt="Nuclear Printing" />
+      <span><span class="bt">Nuclear Printing</span>
+      <span class="bs">Apparel Production · Merchandising Systems</span></span>
+    </a>
+    <div class="nav-links">${navLinks}</div>
+    <button class="btn btn-green nav-cta" data-quote>Get a Quote</button>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 <div class="mnav" id="mnav">
   <button class="mclose" id="mclose" aria-label="Close">&times;</button>
@@ -147,10 +149,7 @@ document.body.insertAdjacentHTML("beforeend",`
       <a href="https://instagram.com/nuclearprinting" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5"/><circle cx="22.5" cy="9.5" r="1.2" fill="currentColor"/></svg>
       </a>
-      <a href="https://nuclearprinting.com" target="_blank" rel="noopener" aria-label="Website">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="16" cy="16" r="11"/><path d="M5 16h22M16 5c4 4 4 18 0 22M16 5c-4 4-4 18 0 22"/></svg>
-      </a>
-      <a href="mailto:Joe@nuclearprinting.com" aria-label="Email">
+      <a href="mailto:quotes@nuclearprinting.com" aria-label="Email">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 10l12 9 12-9"/></svg>
       </a>
     </div>
