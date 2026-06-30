@@ -465,11 +465,12 @@ $$(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 /* ---------- DELEGATED CLICKS ---------- */
 document.addEventListener("click",e=>{
   const q=e.target.closest("[data-quote]");
-  if(q){e.preventDefault();goQuote();return;}
+  if(q){e.preventDefault(); if(q.classList.contains("nav-cta")) pshh(); goQuote(); return;}
   const l=e.target.closest("[data-open-layer]");
   if(l){e.preventDefault();openLayer(l.dataset.openLayer);return;}
-  // every other button / interactive control gets the same click sound — except close (×) buttons and FAQ toggles
-  if(e.target.closest("button,.btn,.story,.story-ring") && !e.target.closest(".mclose,.layer-close,.qm-close,.sv-close,.faq-q")) pshh();
+  // Sound is intentionally limited to two buttons only: the nav "Get a Quote"
+  // (.nav-cta, handled above) and the floating contextual button (#floatBtn,
+  // which plays its sound in fbAction). Every other button is silent.
 });
 
 /* expose for inline use if needed */
