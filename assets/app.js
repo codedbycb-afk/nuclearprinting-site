@@ -226,14 +226,25 @@ function pshh(){
   }catch(e){}
 }
 
+/* ---------- BODY SCROLL LOCK (single source of truth) ----------
+   The body is locked ONLY while some overlay is actually open. After any
+   open/close we recompute from the live DOM, so the lock can never get
+   stuck (which froze scrolling after closing the Get-a-Quote modal). */
+function syncBodyLock(){
+  const anyOpen = document.querySelector(
+    ".quote-modal.on,.quote-scrim.on,.layer.on,.layer-scrim.on,.story-viewer.on,.mnav.on"
+  );
+  document.body.classList.toggle("layer-open", !!anyOpen);
+}
+
 /* ---------- NAV BEHAVIOR ---------- */
 const nav=$("#nav");
 const onScroll=[];
 addEventListener("scroll",()=>onScroll.forEach(f=>f()),{passive:true});
 onScroll.push(()=>nav.classList.toggle("scrolled",scrollY>40));
-$("#burger").onclick=()=>$("#mnav").classList.add("on");
-$("#mclose").onclick=()=>$("#mnav").classList.remove("on");
-$$("#mnav a").forEach(a=>a.addEventListener("click",()=>$("#mnav").classList.remove("on")));
+$("#burger").onclick=()=>{$("#mnav").classList.add("on");syncBodyLock();};
+$("#mclose").onclick=()=>{$("#mnav").classList.remove("on");syncBodyLock();};
+$$("#mnav a").forEach(a=>a.addEventListener("click",()=>{$("#mnav").classList.remove("on");syncBodyLock();}));
 
 /* ---------- SCROLL PROGRESS ---------- */
 const prog=$("#scrollProg");
@@ -336,8 +347,8 @@ if(railEl){
 }
 let svIdx=0,svTimer=null;
 const sv=$("#storyViewer");
-function openStory(i){svIdx=i;document.body.classList.add("layer-open");
-  sv.classList.add("on");renderStory();}
+function openStory(i){svIdx=i;
+  sv.classList.add("on");renderStory();syncBodyLock();}
 function renderStory(){
   const s=STORIES[svIdx];
   $("#svImg").src=s.img;$("#svKicker").textContent=s.kicker;
@@ -346,8 +357,7 @@ function renderStory(){
   clearTimeout(svTimer);
   svTimer=setTimeout(()=>{svIdx<STORIES.length-1?(svIdx++,renderStory()):closeStory();},4200);
 }
-function closeStory(){sv.classList.remove("on");clearTimeout(svTimer);
-  if(!layer.classList.contains("on"))document.body.classList.remove("layer-open");}
+function closeStory(){sv.classList.remove("on");clearTimeout(svTimer);syncBodyLock();}
 $("#svClose").onclick=closeStory;
 $("#svNext").onclick=()=>{svIdx<STORIES.length-1?(svIdx++,renderStory()):closeStory();};
 $("#svPrev").onclick=()=>{if(svIdx>0){svIdx--;renderStory();}};
@@ -417,12 +427,10 @@ function openLayer(key){
       <button class="btn btn-green" data-quote>Get a Quote</button>
       <span class="layer-note">You haven't left the page — the environment is still behind you.</span>
     </div>`;
-  document.body.classList.add("layer-open");
-  scrim.classList.add("on");layer.classList.add("on");
+  scrim.classList.add("on");layer.classList.add("on");syncBodyLock();
 }
 function closeLayer(){
-  scrim.classList.remove("on");layer.classList.remove("on");
-  if(!sv.classList.contains("on"))document.body.classList.remove("layer-open");
+  scrim.classList.remove("on");layer.classList.remove("on");syncBodyLock();
 }
 $("#layerClose").onclick=closeLayer;
 scrim.onclick=closeLayer;
@@ -434,8 +442,7 @@ function goQuote(){
   if(!qm||!qms){console.warn("Quote modal not in DOM");return;}
   closeLayer();
   pshh();
-  document.body.classList.add("layer-open");
-  qms.classList.add("on");qm.classList.add("on");
+  qms.classList.add("on");qm.classList.add("on");syncBodyLock();
   if(!window.__ghlFormLoaded){
     const s=document.createElement("script");
     s.src="https://link.msgsndr.com/js/form_embed.js";
@@ -446,9 +453,7 @@ function goQuote(){
 function closeQuote(){
   const qm=$("#quoteModal"),qms=$("#quoteScrim");
   if(!qm||!qms)return;
-  qms.classList.remove("on");qm.classList.remove("on");
-  if(!sv.classList.contains("on")&&!layer.classList.contains("on"))
-    document.body.classList.remove("layer-open");
+  qms.classList.remove("on");qm.classList.remove("on");syncBodyLock();
 }
 const _qmClose=$("#qmClose"),_qms=$("#quoteScrim");
 if(_qmClose) _qmClose.onclick=closeQuote;
