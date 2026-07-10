@@ -4,7 +4,8 @@
    story viewer. Drives scroll animations. One source of truth.
    ============================================================ */
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
-import { ARTICLES } from "./articles.js?v=26";
+import { ARTICLES } from "./articles.js?v=27";
+import { fetchLiveStories } from "./stories-loader.js?v=27";
 
 /* ---------- HELPERS ---------- */
 const $  = (s,r=document)=>r.querySelector(s);
@@ -353,16 +354,27 @@ const cuObs=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.6});
 $$("[data-count]").forEach(el=>cuObs.observe(el));
 
-/* ---------- STORIES (home only) ---------- */
+/* ---------- STORIES ---------- */
 const railEl=$("#stories");
-if(railEl){
+function buildRail(){
+  if(!railEl) return;
+  railEl.innerHTML="";
   STORIES.forEach((s,i)=>{
+    const glow = s.isNew || (!s.__live && i<3);   // new uploads pulse; legacy demo keeps first-3
     const el=document.createElement("div");
-    el.className="story"+(i<3?" live":"");
+    el.className="story"+(glow?" live":"");
     el.innerHTML=`<div class="story-ring"><img src="${s.img}" alt="${s.label}"/></div>
       <div class="story-label">${s.label}</div>`;
     el.onclick=()=>openStory(i);
     railEl.appendChild(el);
+  });
+}
+buildRail();
+/* Hydrate from the Studio (Supabase): Joe's uploads lead the rail with a glow.
+   Falls back silently to the built-in stories if none exist / unreachable. */
+if(railEl){
+  fetchLiveStories().then(live=>{
+    if(live&&live.length){ STORIES.unshift(...live); buildRail(); }
   });
 }
 let svIdx=0,svTimer=null;
