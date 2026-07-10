@@ -4,6 +4,7 @@
    story viewer. Drives scroll animations. One source of truth.
    ============================================================ */
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
+import { ARTICLES } from "./articles.js?v=26";
 
 /* ---------- HELPERS ---------- */
 const $  = (s,r=document)=>r.querySelector(s);
@@ -204,6 +205,17 @@ document.body.insertAdjacentHTML("beforeend",`
       style="width:100%;border:0;display:block;background:#ffffff"></iframe>
   </div>
 </div>
+<div class="article-scrim" id="articleScrim"></div>
+<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-label="Article">
+  <div class="am-bar">
+    <div class="am-t"><span class="am-dot"></span><span class="am-title" id="articleKicker">From The Floor</span></div>
+    <div class="am-actions">
+      <button class="btn btn-green am-quote" data-quote>Get a Quote</button>
+      <button class="am-close" id="articleClose" aria-label="Close article">&times;</button>
+    </div>
+  </div>
+  <div class="am-body" id="articleBody"></div>
+</div>
 <div class="story-viewer" id="storyViewer">
   <button class="sv-close" id="svClose" aria-label="Close">&times;</button>
   <div class="sv-frame">
@@ -232,9 +244,17 @@ function pshh(){
    stuck (which froze scrolling after closing the Get-a-Quote modal). */
 function syncBodyLock(){
   const anyOpen = document.querySelector(
-    ".quote-modal.on,.quote-scrim.on,.layer.on,.layer-scrim.on,.story-viewer.on,.mnav.on"
+    ".quote-modal.on,.quote-scrim.on,.layer.on,.layer-scrim.on,.article-modal.on,.article-scrim.on,.story-viewer.on,.mnav.on"
   );
   document.body.classList.toggle("layer-open", !!anyOpen);
+  if(!anyOpen){
+    /* GHL's form_embed.js sets an INLINE overflow:hidden on <body>/<html> when the
+       quote-form iframe loads. Our class toggle can't clear an inline style, so the
+       page stayed scroll-locked after closing the quote modal. Force-clear it here —
+       this is the single source of truth, and it only runs when nothing is open. */
+    document.body.style.overflow="";
+    document.documentElement.style.overflow="";
+  }
 }
 
 /* ---------- NAV BEHAVIOR ---------- */
@@ -434,7 +454,7 @@ function closeLayer(){
 }
 $("#layerClose").onclick=closeLayer;
 scrim.onclick=closeLayer;
-addEventListener("keydown",e=>{if(e.key==="Escape"){closeLayer();closeStory();closeQuote();$("#mnav").classList.remove("on");}});
+addEventListener("keydown",e=>{if(e.key==="Escape"){closeLayer();closeStory();closeQuote();closeArticle();$("#mnav").classList.remove("on");}});
 
 /* ---------- QUOTE MODAL (GHL form lightbox) ---------- */
 function goQuote(){
@@ -459,6 +479,74 @@ const _qmClose=$("#qmClose"),_qms=$("#quoteScrim");
 if(_qmClose) _qmClose.onclick=closeQuote;
 if(_qms) _qms.onclick=closeQuote;
 
+/* ---------- BLOG ARTICLE MODAL (data-driven from articles.js) ----------
+   Same pop-up pattern as the apparel-production layer: opens over the blog page
+   with the Quote button still reachable, X or scrim closes it, and the reader
+   stays on the blog to open the next one. Scroll-lock is handled by syncBodyLock. */
+const ARTICLE_BY_SLUG = Object.fromEntries(ARTICLES.map(a=>[a.slug,a]));
+function openArticle(slug){
+  const a=ARTICLE_BY_SLUG[slug]; if(!a) return;
+  const am=$("#articleModal"), ams=$("#articleScrim");
+  if(!am||!ams) return;
+  closeLayer();
+  $("#articleKicker").textContent=a.tag||"From The Floor";
+  $("#articleBody").innerHTML=`
+    <article class="am-article">
+      ${a.hero?`<div class="am-hero"><img src="${a.hero}" alt="${a.title}"/></div>`:""}
+      <div class="am-tag">${a.tag||""}</div>
+      <h1>${a.title}</h1>
+      ${a.dek?`<p class="am-dek">${a.dek}</p>`:""}
+      <div class="am-meta">${[a.read,a.date].filter(Boolean).join(" · ")}</div>
+      <div class="am-copy">${a.body.join("\n")}</div>
+      <div class="am-foot">
+        <button class="btn btn-green" data-quote>Get a Quote</button>
+        <span class="am-note">Questions on a project like this? Start a quote — you won't lose your place.</span>
+      </div>
+    </article>`;
+  $("#articleBody").scrollTop=0;
+  ams.classList.add("on"); am.classList.add("on"); syncBodyLock();
+}
+function closeArticle(){
+  const am=$("#articleModal"), ams=$("#articleScrim");
+  if(!am||!ams) return;
+  ams.classList.remove("on"); am.classList.remove("on"); syncBodyLock();
+}
+const _amClose=$("#articleClose"), _ams=$("#articleScrim");
+if(_amClose) _amClose.onclick=closeArticle;
+if(_ams) _ams.onclick=closeArticle;
+
+/* Render the blog page straight from ARTICLES so the SEO engine only edits data. */
+function renderBlogFeed(){
+  const feed=$("#blogFeed"); if(!feed||!ARTICLES.length) return;
+  const [feat,...rest]=ARTICLES;
+  feed.innerHTML=`
+    <article class="blog-feat reveal">
+      <div class="bf-img"><img src="${feat.hero}" alt="${feat.title}"/></div>
+      <div class="bf-body">
+        <div class="tag" style="font-family:var(--sub);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--green)">${feat.tag}</div>
+        <h3>${feat.title}</h3>
+        <p>${feat.dek}</p>
+        <div style="margin-top:20px"><button class="btn btn-ghost" data-article="${feat.slug}">Read Article</button></div>
+      </div>
+    </article>
+    <div class="section-head reveal" style="margin:54px 0 0">
+      <div class="eyebrow">Latest</div>
+      <h2 style="font-size:clamp(28px,3.4vw,42px)">Recent Writing</h2>
+    </div>
+    <div class="blog-grid">
+      ${rest.map(a=>`
+        <button class="blog-card reveal" data-article="${a.slug}">
+          <div class="tag">${a.tag.split("·").pop().trim()}</div>
+          <h3>${a.title}</h3>
+          <p>${a.dek}</p>
+          <div class="meta">${a.read}</div>
+        </button>`).join("")}
+    </div>
+    <p class="reveal" style="margin-top:38px;color:var(--muted);font-family:var(--sub);text-transform:uppercase;letter-spacing:.12em;font-size:13px">More articles publishing continuously — the blog is an evolving, AI-assisted content system.</p>`;
+  if(typeof bindReveals==="function") bindReveals(feed);
+}
+renderBlogFeed();
+
 /* ---------- FAQ ACCORDION ---------- */
 $$(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   const f=q.closest(".faq"),a=$(".faq-a",f),open=f.classList.contains("open");
@@ -470,6 +558,8 @@ $$(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 document.addEventListener("click",e=>{
   const q=e.target.closest("[data-quote]");
   if(q){e.preventDefault(); if(q.classList.contains("nav-cta")) pshh(); goQuote(); return;}
+  const art=e.target.closest("[data-article]");
+  if(art){e.preventDefault();openArticle(art.dataset.article);return;}
   const l=e.target.closest("[data-open-layer]");
   if(l){e.preventDefault();openLayer(l.dataset.openLayer);return;}
   // Sound is intentionally limited to two buttons only: the nav "Get a Quote"
@@ -478,7 +568,7 @@ document.addEventListener("click",e=>{
 });
 
 /* expose for inline use if needed */
-window.NUCLEAR={openLayer,openStory,goQuote};
+window.NUCLEAR={openLayer,openStory,goQuote,openArticle,closeArticle};
 
 /* ---------- FAILSAFE: never leave the page scroll-locked ----------
    A page restored from back/forward (bfcache) can keep body.layer-open
@@ -486,8 +576,10 @@ window.NUCLEAR={openLayer,openStory,goQuote};
    switching pages. Clear it whenever the page is shown. */
 function __unlockPage(){
   document.body.classList.remove("layer-open");
+  document.body.style.overflow="";
+  document.documentElement.style.overflow="";
   document.querySelectorAll(
-    ".layer.on,.layer-scrim.on,.quote-modal.on,.quote-scrim.on,.story-viewer.on,.mnav.on"
+    ".layer.on,.layer-scrim.on,.quote-modal.on,.quote-scrim.on,.article-modal.on,.article-scrim.on,.story-viewer.on,.mnav.on"
   ).forEach(el=>el.classList.remove("on"));
   clearTimeout(svTimer);
 }

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/app.css?v=25" />
+<link rel="stylesheet" href="assets/app.css?v=26" />
 </head>
 <body>
 
@@ -27,62 +27,14 @@
   </div>
 </header>
 
-<!-- BLOG -->
+<!-- BLOG — rendered from assets/articles.js by app.js into #blogFeed.
+     The blog SEO engine only edits articles.js; this markup stays untouched. -->
 <section class="section blog" data-section="blog" data-cta="Get a Quote">
   <div class="wrap">
-
-    <!-- FEATURED -->
-    <article class="blog-feat reveal">
-      <div class="bf-img"><img src="assets/img/screenprint.jpg" alt="Screen printing press" /></div>
-      <div class="bf-body">
-        <div class="tag" style="font-family:var(--sub);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--green)">Featured · Production</div>
-        <h3>Soft-Hand vs. Standard Prints — What Your Brand Actually Needs</h3>
-        <p>Not every print should feel the same. A breakdown of where soft-hand screen printing wins, when a standard print is the smarter call, and how the finish quietly shapes how your brand is perceived.</p>
-        <div style="margin-top:20px"><a class="btn btn-ghost" href="blog.html">Read Article</a></div>
-      </div>
-    </article>
-
-    <div class="section-head reveal" style="margin:54px 0 0">
-      <div class="eyebrow">Latest</div>
-      <h2 style="font-size:clamp(28px,3.4vw,42px)">Recent Writing</h2>
-    </div>
-
-    <div class="blog-grid">
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Merch Systems</div>
-        <h3>Why Company Apparel Belongs On An Online Ordering System</h3>
-        <p>Spreadsheets and group texts don't scale. How a branded ordering link removes the back-and-forth.</p>
-        <div class="meta">Merchandising · 5 min</div></a>
-
-      <a class="blog-card reveal" href="blog.html"><div class="tag">File Setup</div>
-        <h3>Production-Ready Artwork: The Gap Between Canva And The Press</h3>
-        <p>Why a file that looks perfect on screen can still fall apart on a garment — and how to fix it.</p>
-        <div class="meta">File Refinement · 3 min</div></a>
-
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Embroidery</div>
-        <h3>Caps, Uniforms & Stitch Count: A Quick Embroidery Primer</h3>
-        <p>What actually drives embroidery quality and cost — and where the detail really matters.</p>
-        <div class="meta">Apparel Production · 4 min</div></a>
-
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Production Culture</div>
-        <h3>What "Completed On Time" Really Takes Behind The Scenes</h3>
-        <p>On-time isn't luck. A look at the organized, standardized workflows that keep orders moving.</p>
-        <div class="meta">Inside Nuclear · 4 min</div></a>
-
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Brand</div>
-        <h3>A True Identity, Not Just A Logo</h3>
-        <p>What full brand development covers — and why strong brands start with a discovery call.</p>
-        <div class="meta">Brand Development · 5 min</div></a>
-
-      <a class="blog-card reveal" href="blog.html"><div class="tag">Industry</div>
-        <h3>Choosing A Cleveland Apparel Partner — Not Just A Vendor</h3>
-        <p>The difference between order-taking and a real production partnership, and why it shows.</p>
-        <div class="meta">Industry Insights · 4 min</div></a>
-    </div>
-
-    <p class="reveal" style="margin-top:38px;color:var(--muted);font-family:var(--sub);text-transform:uppercase;letter-spacing:.12em;font-size:13px">More articles publishing soon — the blog is an evolving, AI-assisted content system.</p>
+    <div id="blogFeed"></div>
   </div>
 </section>
 
-<script type="module" src="assets/app.js?v=25"></script>
+<script type="module" src="assets/app.js?v=26"></script>
 </body>
 </html>
