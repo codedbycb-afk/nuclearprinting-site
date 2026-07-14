@@ -1,7 +1,7 @@
 /* Minimal service worker — makes the Studio installable to the home screen
    and lets it open offline (shell only; data always fetches live from Supabase). */
-const CACHE = "nuclear-stories-v1";
-const SHELL = ["./index.html", "./app.js", "./manifest.webmanifest"];
+const CACHE = "nuclear-stories-v2";   // bump on every shell change or Joe keeps the old app
+const SHELL = ["./index.html", "./app.js", "./editor.js", "./manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));

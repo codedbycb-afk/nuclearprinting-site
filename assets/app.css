@@ -80,23 +80,54 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 /* ---------- STORIES RAIL ---------- */
 .stories{position:relative;z-index:60;background:var(--black);
   border-bottom:1px solid var(--line);padding:84px 0 0}
-.stories-inner{display:flex;gap:34px;overflow-x:auto;padding:18px 32px 22px;scrollbar-width:none}
+.stories-inner{display:flex;gap:54px;overflow-x:auto;padding:22px 40px 26px;scrollbar-width:none}
 .stories-inner::-webkit-scrollbar{display:none}
 /* center the rail; auto margins collapse to 0 on overflow so nothing clips when it scrolls */
 .stories-inner>.story:first-child{margin-left:auto}
 .stories-inner>.story:last-child{margin-right:auto}
 .story{flex:0 0 auto;width:74px;text-align:center;cursor:pointer}
-.story-ring{width:74px;height:74px;border-radius:50%;padding:3px;
+.story-ring{position:relative;width:74px;height:74px;border-radius:50%;padding:3px;
   background:conic-gradient(from 140deg,var(--green),var(--green-dim),var(--green));
   transition:transform .3s var(--ease)}
-.story.live .story-ring{animation:pulsering 3.4s var(--ease) infinite}
-@keyframes pulsering{0%,100%{box-shadow:0 0 0 0 rgba(45,176,134,0)}
-  50%{box-shadow:0 0 0 5px rgba(45,176,134,.16)}}
 .story:hover .story-ring{transform:scale(1.06)}
-.story-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;
-  border:2px solid var(--black);filter:grayscale(.3)}
+.story-ring img{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;
+  object-fit:cover;border:2px solid var(--black);filter:grayscale(.3);
+  transition:filter .3s var(--ease)}
 .story-label{font-family:var(--sub);text-transform:uppercase;letter-spacing:.08em;
-  font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.25}
+  font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.25;
+  transition:color .3s var(--ease)}
+
+/* ---------- NEW-STORY GLOW (24h) ----------
+   A story pulses only while glow_until is in the future (see stories-loader.js).
+   Three layers stack so it reads as "new" at a glance from across the page:
+   a sweeping conic ring, a breathing halo, and full-color art + a NEW pill. */
+.story.live .story-ring{
+  background:conic-gradient(from 140deg,var(--green),#8affd6,var(--green),var(--green-dim),var(--green));
+  animation:glowhalo 2.6s var(--ease) infinite}
+.story.live .story-ring::before{
+  content:"";position:absolute;inset:-5px;border-radius:50%;z-index:0;
+  background:conic-gradient(from 0deg,transparent 0deg,rgba(45,176,134,.0) 40deg,
+    #2db086 130deg,#8affd6 180deg,#2db086 230deg,rgba(45,176,134,0) 320deg,transparent 360deg);
+  filter:blur(1px);
+  animation:ringsweep 2.8s linear infinite}
+.story.live .story-ring img{filter:none}
+.story.live .story-label{color:var(--green);font-weight:700}
+/* NEW pill — sits on the ring's lower edge, so the eye lands on it, not the label */
+.story.live .story-ring::after{
+  content:"NEW";position:absolute;z-index:2;left:50%;bottom:-7px;transform:translateX(-50%);
+  background:var(--green);color:#062018;font-family:var(--sub);font-weight:700;
+  font-size:8.5px;letter-spacing:.1em;line-height:1;padding:4px 7px;border-radius:999px;
+  border:2px solid var(--black);box-shadow:0 0 12px rgba(45,176,134,.7);
+  animation:newpill 2.6s var(--ease) infinite}
+@keyframes ringsweep{to{transform:rotate(360deg)}}
+@keyframes glowhalo{
+  0%,100%{box-shadow:0 0 0 0 rgba(45,176,134,.30),0 0 14px 2px rgba(45,176,134,.30)}
+  50%    {box-shadow:0 0 0 7px rgba(45,176,134,.06),0 0 30px 8px rgba(45,176,134,.62)}}
+@keyframes newpill{0%,100%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(1.09)}}
+@media(prefers-reduced-motion:reduce){
+  .story.live .story-ring,.story.live .story-ring::before,.story.live .story-ring::after{animation:none}
+  .story.live .story-ring{box-shadow:0 0 18px 4px rgba(45,176,134,.5)}}
 
 /* ---------- HERO (home) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
@@ -587,22 +618,60 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
 .story-viewer.on{opacity:1;pointer-events:auto}
-.sv-frame{position:relative;width:min(420px,92vw);height:min(740px,86vh);
-  border-radius:8px;overflow:hidden;background:var(--black)}
+.sv-frame{position:relative;width:min(560px,95vw);height:min(940px,92vh);
+  border-radius:10px;overflow:hidden;background:var(--black)}
 .sv-frame img{width:100%;height:100%;object-fit:cover}
 .sv-frame::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(9,9,9,.7),transparent 30%,transparent 64%,rgba(9,9,9,.92))}
-.sv-bars{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:5px;z-index:3}
-.sv-bars i{flex:1;height:3px;background:rgba(242,242,242,.3);border-radius:2px;overflow:hidden}
+.sv-bars{position:absolute;top:14px;left:14px;right:14px;display:flex;gap:5px;z-index:3}
+.sv-bars i{flex:1;height:4px;background:rgba(242,242,242,.3);border-radius:2px;overflow:hidden}
 .sv-bars i.done{background:var(--green)}
-.sv-cap{position:absolute;left:20px;right:20px;bottom:24px;z-index:3}
-.sv-cap .eyebrow{font-size:11px}
-.sv-cap h3{font-family:var(--head);text-transform:uppercase;font-size:24px;margin-top:8px}
-.sv-cap p{font-size:15px;color:var(--muted);margin-top:6px}
-.sv-close{position:absolute;top:18px;right:18px;z-index:5;background:none;
-  border:0;color:var(--light);font-size:26px;cursor:pointer}
+.sv-cap{position:absolute;left:26px;right:26px;bottom:30px;z-index:3}
+.sv-cap .eyebrow{font-size:12px}
+.sv-cap h3{font-family:var(--head);text-transform:uppercase;font-size:30px;margin-top:9px}
+.sv-cap p{font-size:17px;line-height:1.45;color:var(--muted);margin-top:8px}
+.sv-close{position:absolute;top:16px;right:18px;z-index:5;background:none;
+  border:0;color:var(--light);font-size:30px;line-height:1;cursor:pointer}
 .sv-nav{position:absolute;top:0;bottom:0;width:34%;z-index:4;cursor:pointer}
 .sv-nav.prev{left:0}.sv-nav.next{right:0}
+
+/* ---------- STORY OUTRO CARD ----------
+   The last frame of every category. It reads as one more story image, but it's
+   the sign-off + quote CTA. It never auto-advances — the viewer decides when to
+   leave, then picks the next category themselves. */
+.sv-outro{position:absolute;inset:0;z-index:4;display:none;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:44px 34px;
+  background:radial-gradient(115% 80% at 50% 30%,rgba(45,176,134,.20),transparent 62%),
+    linear-gradient(180deg,#0d1512 0%,#090909 58%,#050807 100%)}
+.story-viewer.outro .sv-outro{display:flex}
+/* the photo, bars and caption belong to the real slides — hide them on the outro */
+.story-viewer.outro .sv-frame img,
+.story-viewer.outro .sv-cap,
+.story-viewer.outro .sv-frame::after{display:none}
+.story-viewer.outro .sv-nav{width:0}
+.svo-mark{width:58px;height:58px;margin-bottom:26px;opacity:.95;
+  filter:drop-shadow(0 0 16px rgba(45,176,134,.55));animation:svomark 3.4s var(--ease) infinite}
+@keyframes svomark{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.06);opacity:1}}
+.svo-eyebrow{font-family:var(--sub);text-transform:uppercase;letter-spacing:.22em;
+  font-size:11px;color:var(--green);margin-bottom:14px}
+.svo-title{font-family:var(--head);text-transform:uppercase;line-height:1.04;
+  font-size:clamp(28px,6vw,40px);color:var(--light);margin-bottom:16px}
+.svo-text{font-size:16px;line-height:1.5;color:var(--muted);max-width:34ch;margin-bottom:30px}
+.svo-cta{font-family:var(--sub);text-transform:uppercase;letter-spacing:.1em;font-weight:700;
+  font-size:14px;padding:16px 34px;border:0;border-radius:4px;cursor:pointer;
+  background:var(--green);color:#062018;
+  box-shadow:0 10px 34px rgba(45,176,134,.34);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+  animation:svocta 2.4s var(--ease) infinite}
+.svo-cta:hover{transform:translateY(-2px);box-shadow:0 14px 42px rgba(45,176,134,.5)}
+@keyframes svocta{0%,100%{box-shadow:0 10px 34px rgba(45,176,134,.30),0 0 0 0 rgba(45,176,134,.42)}
+  50%{box-shadow:0 10px 34px rgba(45,176,134,.44),0 0 0 12px rgba(45,176,134,0)}}
+.svo-dismiss{margin-top:24px;background:none;border:0;cursor:pointer;
+  font-family:var(--sub);text-transform:uppercase;letter-spacing:.14em;font-size:11px;
+  color:rgba(242,242,242,.5);transition:color .2s var(--ease)}
+.svo-dismiss:hover{color:var(--light)}
+@media(prefers-reduced-motion:reduce){.svo-mark,.svo-cta{animation:none}}
 
 /* ---------- SCROLL ANIMATIONS ---------- */
 .reveal{opacity:0;transform:translateY(28px);
@@ -649,7 +718,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   .hero-pills{gap:10px;margin-top:30px}
   .pill{flex:1 1 100%;padding:12px 18px}
   .prod-card.big{min-height:380px}
-  .stories-inner{padding:18px 20px 20px}
+  .stories-inner{gap:34px;padding:20px 22px 24px}
   .hero-inner{padding:120px 0 70px}
   .page-hero-inner{padding:130px 0 56px}
   .hero-meta{gap:20px}

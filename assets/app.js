@@ -4,8 +4,8 @@
    story viewer. Drives scroll animations. One source of truth.
    ============================================================ */
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
-import { ARTICLES } from "./articles.js?v=27";
-import { fetchLiveStories } from "./stories-loader.js?v=27";
+import { ARTICLES } from "./articles.js?v=28";
+import { fetchLiveStories, isGlowing } from "./stories-loader.js?v=28";
 
 /* ---------- HELPERS ---------- */
 const $  = (s,r=document)=>r.querySelector(s);
@@ -14,11 +14,12 @@ const PAGE = (location.pathname.split("/").pop()||"index.html").toLowerCase()||"
 const HOME = PAGE==="index.html"||PAGE==="";
 
 /* ---------- NAV MODEL ---------- */
+/* The blog lives on the FAQ page now ("From The Floor", under Before You Order),
+   so there is no standalone Blog tab. blog.html stays as a redirect for old links. */
 const NAV=[
   ["apparel-production.html","Apparel Production"],
   ["merchandising-systems.html","Merchandising Systems"],
   ["resources.html","Resources"],
-  ["blog.html","Blog"],
   ["faq.html","FAQ"],
 ];
 const navLinks = NAV.map(([h,t])=>
@@ -164,7 +165,8 @@ document.body.insertAdjacentHTML("beforeend",`
       <a href="apparel-production.html">Apparel Production</a>
       <a href="merchandising-systems.html">Merchandising Systems</a>
       <a href="resources.html">Resources</a>
-      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="faq.html#from-the-floor">From The Floor</a>
       <span class="ls-copy">© ${yr} Nuclear Printing</span>
     </div>
   </div>
@@ -226,6 +228,18 @@ document.body.insertAdjacentHTML("beforeend",`
       <h3 id="svTitle"></h3><p id="svText"></p></div>
     <div class="sv-nav prev" id="svPrev"></div>
     <div class="sv-nav next" id="svNext"></div>
+    <div class="sv-outro" id="svOutro">
+      <svg class="svo-mark" viewBox="0 0 32 32" fill="none" stroke="#2db086" stroke-width="1.6">
+        <circle cx="16" cy="16" r="14" stroke-dasharray="3 3" opacity=".55"/>
+        <circle cx="16" cy="16" r="3.2" fill="#2db086" stroke="none"/>
+        <path d="M16 13V5M16 19l-6.9 4M16 19l6.9 4"/>
+      </svg>
+      <div class="svo-eyebrow" id="svOutroCat">Nuclear Printing</div>
+      <h3 class="svo-title">Thank You For<br>Checking Us Out</h3>
+      <p class="svo-text">Feel free to explore further. If you need a quote, it starts right here.</p>
+      <button class="svo-cta" id="svOutroQuote">Get a Quote</button>
+      <button class="svo-dismiss" id="svOutroClose">Back to stories</button>
+    </div>
   </div>
 </div>`);
 
@@ -374,26 +388,66 @@ buildRail();
    Falls back silently to the built-in stories if none exist / unreachable. */
 if(railEl){
   fetchLiveStories().then(live=>{
-    if(live&&live.length){ STORIES.unshift(...live); buildRail(); }
+    if(live&&live.length){ STORIES.unshift(...live); buildRail(); scheduleGlowExpiry(live); }
   });
 }
-let svIdx=0,svTimer=null;
+/* The glow is derived from a timestamp, so a tab left open past the 24h mark
+   would keep pulsing. Re-render exactly when the next one lapses. */
+function scheduleGlowExpiry(live){
+  const now=Date.now();
+  const next=live.map(s=>s.glowUntil?new Date(s.glowUntil).getTime():0)
+                 .filter(t=>t>now).sort((a,b)=>a-b)[0];
+  if(!next) return;
+  setTimeout(()=>{
+    live.forEach(s=>{ s.isNew=isGlowing(s); s.kicker=s.isNew?"Just Posted":s.label; });
+    buildRail(); scheduleGlowExpiry(live);
+  },Math.min(next-now+1000,2147483000));
+}
+/* Playback stays inside the category you tapped. svQueue holds only that
+   category's stories, so it plays them through and stops — it never runs on into
+   Embroidery because you opened Screen Printing. The queue ends with an OUTRO
+   frame (thank-you + quote CTA) that does NOT auto-advance: the viewer closes it
+   themselves and picks the next category off the rail. */
+const OUTRO=-1;
+let svQueue=[],svPos=0,svTimer=null,svCat="";
 const sv=$("#storyViewer");
-function openStory(i){svIdx=i;
-  sv.classList.add("on");renderStory();syncBodyLock();}
+function openStory(i){
+  svCat=STORIES[i].label;
+  svQueue=STORIES.map((s,j)=>({s,j})).filter(o=>o.s.label===svCat).map(o=>o.j);
+  svQueue.push(OUTRO);                       // sign-off frame closes every category
+  svPos=Math.max(0,svQueue.indexOf(i));
+  sv.classList.add("on");renderStory();syncBodyLock();
+}
 function renderStory(){
-  const s=STORIES[svIdx];
+  const idx=svQueue[svPos];
+  const isOutro=idx===OUTRO;
+  sv.classList.toggle("outro",isOutro);
+  $("#svBars").innerHTML=svQueue.map((_,j)=>`<i class="${j<=svPos?'done':''}"></i>`).join("");
+  clearTimeout(svTimer);
+  if(isOutro){
+    $("#svOutroCat").textContent=svCat;
+    return;                                   // no timer — the CTA has to stay reachable
+  }
+  const s=STORIES[idx];
   $("#svImg").src=s.img;$("#svKicker").textContent=s.kicker;
   $("#svTitle").textContent=s.title;$("#svText").textContent=s.text;
-  $("#svBars").innerHTML=STORIES.map((_,j)=>`<i class="${j<=svIdx?'done':''}"></i>`).join("");
-  clearTimeout(svTimer);
-  svTimer=setTimeout(()=>{svIdx<STORIES.length-1?(svIdx++,renderStory()):closeStory();},4200);
+  svTimer=setTimeout(nextStory,4200);
 }
-function closeStory(){sv.classList.remove("on");clearTimeout(svTimer);syncBodyLock();}
+function nextStory(){svPos<svQueue.length-1?(svPos++,renderStory()):closeStory();}
+function prevStory(){if(svPos>0){svPos--;renderStory();}}
+function closeStory(){sv.classList.remove("on","outro");clearTimeout(svTimer);syncBodyLock();}
 $("#svClose").onclick=closeStory;
-$("#svNext").onclick=()=>{svIdx<STORIES.length-1?(svIdx++,renderStory()):closeStory();};
-$("#svPrev").onclick=()=>{if(svIdx>0){svIdx--;renderStory();}};
+$("#svNext").onclick=nextStory;
+$("#svPrev").onclick=prevStory;
+$("#svOutroClose").onclick=closeStory;
+$("#svOutroQuote").onclick=()=>{closeStory();goQuote();};
 sv.addEventListener("click",e=>{if(e.target===sv)closeStory();});
+document.addEventListener("keydown",e=>{
+  if(!sv.classList.contains("on"))return;
+  if(e.key==="Escape")closeStory();
+  if(e.key==="ArrowRight")nextStory();
+  if(e.key==="ArrowLeft")prevStory();
+});
 
 /* ---------- FLOATING BUTTON — contextual state machine ---------- */
 const fb=$("#floatBtn"),fbText=$("#fbText");
