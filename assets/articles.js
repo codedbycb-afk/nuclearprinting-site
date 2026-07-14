@@ -14,7 +14,7 @@ export const ARTICLES = [
     tag: "Featured · Production",
     title: "Soft-Hand vs. Standard Prints — What Your Brand Actually Needs",
     dek: "Not every print should feel the same. Where soft-hand wins, when a standard print is the smarter call, and how the finish shapes how your brand is read.",
-    read: "6 min",
+    read: "2 min",
     date: "2026-07-09",
     hero: "assets/img/screenprint.jpg",
     body: [
@@ -33,7 +33,7 @@ export const ARTICLES = [
     tag: "Merch Systems",
     title: "Why Company Apparel Belongs On An Online Ordering System",
     dek: "Spreadsheets and group texts don't scale. How a branded ordering link removes the back-and-forth.",
-    read: "5 min",
+    read: "2 min",
     date: "2026-07-08",
     hero: "assets/img/ink.jpg",
     body: [
@@ -50,7 +50,7 @@ export const ARTICLES = [
     tag: "File Setup",
     title: "Production-Ready Artwork: The Gap Between Canva And The Press",
     dek: "Why a file that looks perfect on screen can still fall apart on a garment — and how to close the gap.",
-    read: "4 min",
+    read: "2 min",
     date: "2026-07-07",
     hero: "assets/img/squeegee-bw.jpg",
     body: [
@@ -67,7 +67,7 @@ export const ARTICLES = [
     tag: "Embroidery",
     title: "Caps, Uniforms & Stitch Count: A Quick Embroidery Primer",
     dek: "What actually drives embroidery quality and cost — and where the detail really matters.",
-    read: "4 min",
+    read: "2 min",
     date: "2026-07-06",
     hero: "assets/img/embroidery.jpg",
     body: [
@@ -84,7 +84,7 @@ export const ARTICLES = [
     tag: "Production Culture",
     title: "What “Completed On Time” Really Takes Behind The Scenes",
     dek: "On-time isn't luck. A look at the organized, standardized workflows that keep orders moving.",
-    read: "4 min",
+    read: "2 min",
     date: "2026-07-05",
     hero: "assets/img/ink.jpg",
     body: [
@@ -101,7 +101,7 @@ export const ARTICLES = [
     tag: "Brand",
     title: "A True Identity, Not Just A Logo",
     dek: "What full brand development covers — and why strong brands start with a discovery call.",
-    read: "5 min",
+    read: "2 min",
     date: "2026-07-04",
     hero: "assets/img/screenprint.jpg",
     body: [
@@ -118,7 +118,7 @@ export const ARTICLES = [
     tag: "Industry",
     title: "Choosing A Cleveland Apparel Partner — Not Just A Vendor",
     dek: "The difference between order-taking and a real production partnership, and why it shows.",
-    read: "4 min",
+    read: "2 min",
     date: "2026-07-03",
     hero: "assets/img/squeegee-bw.jpg",
     body: [

@@ -28,8 +28,8 @@ export async function fetchLiveStories() {
         glowUntil: s.glow_until,
         __live: true
       };
-      st.isNew = isGlowing(st);
-      st.kicker = st.isNew ? "Just Posted" : s.category;
+      st.isNew = isGlowing(st);   // still drives the 24h ring glow, not any label
+      st.kicker = s.category;      // no "Just Posted" / NEW wording (Joe's call, 2026-07-14)
       return st;
     });
   } catch { return []; }

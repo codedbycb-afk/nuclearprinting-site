@@ -4,8 +4,8 @@
    story viewer. Drives scroll animations. One source of truth.
    ============================================================ */
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
-import { ARTICLES } from "./articles.js?v=28";
-import { fetchLiveStories, isGlowing } from "./stories-loader.js?v=28";
+import { ARTICLES } from "./articles.js?v=29";
+import { fetchLiveStories, isGlowing } from "./stories-loader.js?v=29";
 
 /* ---------- HELPERS ---------- */
 const $  = (s,r=document)=>r.querySelector(s);

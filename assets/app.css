@@ -13,9 +13,15 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+/* Kill sideways panning for real. overflow-x:hidden on <body> alone doesn't hold
+   on iOS Safari — the page still rubber-bands past the edge. `clip` on BOTH html
+   and body pins it without creating a scroll container (so the sticky nav still
+   sticks). Any element wider than the viewport is contained, not scrollable. */
+html{overflow-x:clip}
 body{
   background:var(--black);color:var(--light);font-family:var(--body);
-  font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:clip;max-width:100%;
 }
 body.layer-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
@@ -112,21 +118,13 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   animation:ringsweep 2.8s linear infinite}
 .story.live .story-ring img{filter:none}
 .story.live .story-label{color:var(--green);font-weight:700}
-/* NEW pill — sits on the ring's lower edge, so the eye lands on it, not the label */
-.story.live .story-ring::after{
-  content:"NEW";position:absolute;z-index:2;left:50%;bottom:-7px;transform:translateX(-50%);
-  background:var(--green);color:#062018;font-family:var(--sub);font-weight:700;
-  font-size:8.5px;letter-spacing:.1em;line-height:1;padding:4px 7px;border-radius:999px;
-  border:2px solid var(--black);box-shadow:0 0 12px rgba(45,176,134,.7);
-  animation:newpill 2.6s var(--ease) infinite}
+/* The glow itself signals "new" — no text pill (Joe's call, 2026-07-14). */
 @keyframes ringsweep{to{transform:rotate(360deg)}}
 @keyframes glowhalo{
   0%,100%{box-shadow:0 0 0 0 rgba(45,176,134,.30),0 0 14px 2px rgba(45,176,134,.30)}
   50%    {box-shadow:0 0 0 7px rgba(45,176,134,.06),0 0 30px 8px rgba(45,176,134,.62)}}
-@keyframes newpill{0%,100%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(1.09)}}
 @media(prefers-reduced-motion:reduce){
-  .story.live .story-ring,.story.live .story-ring::before,.story.live .story-ring::after{animation:none}
+  .story.live .story-ring,.story.live .story-ring::before{animation:none}
   .story.live .story-ring{box-shadow:0 0 18px 4px rgba(45,176,134,.5)}}
 
 /* ---------- HERO (home) ---------- */
@@ -136,7 +134,8 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(105deg,rgba(9,9,9,.96) 28%,rgba(9,9,9,.6) 62%,rgba(9,9,9,.85))}
 .hero-inner{position:relative;z-index:2;padding:140px 0 90px}
-.hero h1{font-size:clamp(46px,8.4vw,108px);max-width:14ch;margin:20px 0 0}
+.hero h1{font-size:clamp(46px,8.4vw,108px);max-width:14ch;margin:20px 0 0;
+  overflow-wrap:break-word}
 .hero h1 .g{color:var(--green)}
 .hero-sub{font-family:var(--sub);font-weight:700;text-transform:uppercase;
   letter-spacing:.04em;font-size:clamp(17px,2vw,23px);color:var(--light);
@@ -721,6 +720,14 @@ h1,h2,h3{font-family:var(--head);font-weight:400;text-transform:uppercase;line-h
   .stories-inner{gap:34px;padding:20px 22px 24px}
   .hero-inner{padding:120px 0 70px}
   .page-hero-inner{padding:130px 0 56px}
+  /* The big display headings have single words (EMBROIDERY, RETAIL-QUALITY) that
+     are wider than a phone at the desktop floor — that was the sideways overflow.
+     Cap them to the viewport and let long words wrap. */
+  .hero h1,.page-hero h1,.ap-hero h1,.floor-intro h2,.m-text h2,.lets-start h2{
+    max-width:100%;overflow-wrap:break-word;hyphens:auto}
+  .hero h1{font-size:clamp(34px,9.4vw,52px)}
+  .page-hero h1{font-size:clamp(32px,8.6vw,48px)}
+  .ap-hero h1{font-size:clamp(40px,12vw,64px)}
   .hero-meta{gap:20px}
   .footer-top{flex-direction:column}
   .float-btn{right:16px;top:50%;margin-top:-24px;bottom:auto;padding:11px 18px 11px 12px}
